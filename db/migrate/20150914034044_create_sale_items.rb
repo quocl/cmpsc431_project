@@ -1,10 +1,10 @@
 class CreateSaleItems < ActiveRecord::Migration
   def change
     create_table :sale_items do |t|
-      t.string :name
-      t.text :description
-      t.double :price
-      t.string :location
+      t.string :item_name
+      t.text :item_description
+      t.float :item_price
+      t.string :item_location
 
       t.timestamps null: false
     end

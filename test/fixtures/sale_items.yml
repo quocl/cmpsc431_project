@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyText
-  price: 
-  location: MyString
+  item_name: MyString
+  item_description: MyText
+  item_price: 1.5
+  item_location: MyString
 
 two:
-  name: MyString
-  description: MyText
-  price: 
-  location: MyString
+  item_name: MyString
+  item_description: MyText
+  item_price: 1.5
+  item_location: MyString

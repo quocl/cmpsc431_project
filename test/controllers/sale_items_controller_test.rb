@@ -18,7 +18,7 @@ class SaleItemsControllerTest < ActionController::TestCase
 
   test "should create sale_item" do
     assert_difference('SaleItem.count') do
-      post :create, sale_item: { description: @sale_item.description, location: @sale_item.location, name: @sale_item.name, price: @sale_item.price }
+      post :create, sale_item: { item_description: @sale_item.item_description, item_location: @sale_item.item_location, item_name: @sale_item.item_name, item_price: @sale_item.item_price }
     end
 
     assert_redirected_to sale_item_path(assigns(:sale_item))
@@ -35,7 +35,7 @@ class SaleItemsControllerTest < ActionController::TestCase
   end
 
   test "should update sale_item" do
-    patch :update, id: @sale_item, sale_item: { description: @sale_item.description, location: @sale_item.location, name: @sale_item.name, price: @sale_item.price }
+    patch :update, id: @sale_item, sale_item: { item_description: @sale_item.item_description, item_location: @sale_item.item_location, item_name: @sale_item.item_name, item_price: @sale_item.item_price }
     assert_redirected_to sale_item_path(assigns(:sale_item))
   end
 
