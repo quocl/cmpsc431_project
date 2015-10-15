@@ -4,14 +4,14 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.where(category_id: nil)
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
     @category = Category.find(params[:id])
-    @child_categories = @category.categories
+    @child_categories = Category.where(category_id: params[:id])
   end
 
   # GET /categories/new
