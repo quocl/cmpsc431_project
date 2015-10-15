@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>OnlineShop</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>Store</title>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+  <![endif]-->
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
-<div id="user_nav">
-  <% if user_signed_in? %>
-    Signed in as <%= current_user.email %>. Not you?
-    <%= link_to "Sign out", destroy_user_session_path %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path %> or
-    <%= link_to "Sign in", new_user_session_path %>
-  <% end %>
-</div>
 
-<%= yield %>
-
+  <div class="collapse navbar-collapse navbar navbar-default navbar-fixed-top">
+    <ul class="nav navbar-nav pull-right">
+      <% if user_signed_in? %>
+        <li>
+            <%= link_to "Hello #{current_user.email}" rescue nil %>
+        </li>
+        <li class='active'>
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+        </li>
+        <li>
+          <%= link_to('Edit Registration', edit_user_registration_path) %>
+        </li>
+      <% else %>
+        <li class='active'>
+        <%= link_to('Login', new_user_session_path)  %>  
+        </li>
+        <li>
+        <%= link_to('Register', new_user_registration_path)  %>
+        </li>
+      <% end %>
+      <li>
+    </ul>
+    <ul class="nav navbar-nav">
+        <li>
+            <%= link_to("Sale Items", sale_items_path) %>
+        </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="span10"><%= yield %></div>
+      
+    </div>
+  </div>
 </body>
 </html>
