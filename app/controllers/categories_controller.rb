@@ -14,6 +14,10 @@ class CategoriesController < ApplicationController
     @child_categories = Category.where(category_id: params[:id])
   end
 
+  def sale_items
+    @sale_items = SaleItem.where(category_id: params[:id])
+  end
+
   # GET /categories/new
   def new
     @category = Category.new
