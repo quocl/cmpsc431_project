@@ -1,6 +1,6 @@
 class WishlistsController < ApplicationController
-  # before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, :only => [:edit, :update, :destroy, :create]
+  before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
+   before_filter :authenticate_user!, :only => [:edit, :update, :destroy, :create]
   # GET /wishlists
   # GET /wishlists.json
   def index
@@ -25,8 +25,7 @@ class WishlistsController < ApplicationController
   # POST /wishlists.json
   def create
     @wishlist = Wishlist.new(wishlist_params)
-    
-    
+
     respond_to do |format|
       if @wishlist.save
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully created.' }
@@ -70,6 +69,6 @@ class WishlistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wishlist_params
-      params.require(:wishlist).permit(:user_id, :name)
+      params.require(:wishlist).permit(:name, :user_id)
     end
 end
