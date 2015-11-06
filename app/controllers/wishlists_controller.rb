@@ -24,8 +24,8 @@ class WishlistsController < ApplicationController
   # POST /wishlists
   # POST /wishlists.json
   def create
-    @wishlist = Wishlist.new(wishlist_params)
-
+    @wishlist = Wishlist.new(name: params[:wishlist][:name],
+                       user_id: current_user.email)
     respond_to do |format|
       if @wishlist.save
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully created.' }
