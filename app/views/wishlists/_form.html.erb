@@ -1,3 +1,4 @@
+
 <%= form_for(@wishlist) do |f| %>
   <% if @wishlist.errors.any? %>
     <div id="error_explanation">
@@ -10,15 +11,17 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :user %><br>
-    <%= f.text_field :user %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label "Give your wishlist a name." %><br>
+      <%= f.text_field :name %><br>
+      </div>
+    <div class="field">
+      <%= f.label "Give your wishlist a home." %><br>
+      <%= f.text_field :user_id %><br>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div><br>
+      
+    </div>
 <% end %>

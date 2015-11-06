@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20151027142110) do
   add_index "categories", ["category_id"], name: "index_categories_on_category_id"
 
   create_table "sale_items", force: :cascade do |t|
+    t.text     "user"
     t.string   "item_name"
     t.text     "item_description"
     t.float    "item_price"

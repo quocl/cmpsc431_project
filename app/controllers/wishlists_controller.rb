@@ -1,6 +1,6 @@
 class WishlistsController < ApplicationController
-  before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
-
+  # before_action :set_wishlist, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, :only => [:edit, :update, :destroy, :create]
   # GET /wishlists
   # GET /wishlists.json
   def index
@@ -15,7 +15,6 @@ class WishlistsController < ApplicationController
   # GET /wishlists/new
   def new
     @wishlist = Wishlist.new
-    @wishlist.user = current_user if user_signed_in?
   end
 
   # GET /wishlists/1/edit
@@ -26,7 +25,8 @@ class WishlistsController < ApplicationController
   # POST /wishlists.json
   def create
     @wishlist = Wishlist.new(wishlist_params)
-
+    
+    
     respond_to do |format|
       if @wishlist.save
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully created.' }
