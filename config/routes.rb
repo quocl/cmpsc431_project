@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  resources :wishlists
-  resources :wishlists
+  resources :addresses
   devise_for :users
   resources :categories 
   resources :sale_items

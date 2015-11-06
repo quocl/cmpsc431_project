@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106143430) do
+ActiveRecord::Schema.define(version: 20151106164417) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "user_id",    null: false
+    t.text     "street",     null: false
+    t.string   "city",       null: false
+    t.integer  "zipcode",    null: false
+    t.string   "addrType",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "addresses", ["street"], name: "index_addresses_on_street"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -54,10 +66,12 @@ ActiveRecord::Schema.define(version: 20151106143430) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "wishlists", force: :cascade do |t|
-    t.string   "name"
     t.string   "user_id"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "wishlists", ["user_id"], name: "index_wishlists_on_user_id"
 
 end
