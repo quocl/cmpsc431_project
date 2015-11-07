@@ -13,10 +13,15 @@
 <body>
 
   <div class="collapse navbar-collapse navbar navbar-default navbar-fixed-top">
+    
     <ul class="nav navbar-nav pull-right">
-      <% if user_signed_in? %>
+
+      <% if user_signed_in? %>\
+        <li class="pull-left cart-text">
+          <%= render 'layouts/cart_text' %>
+        </li>
         <li>
-            <%= link_to "Hello #{current_user.email}" rescue nil %>
+          <%= link_to "Hello #{current_user.email}" rescue nil %>
         </li>
         <li class='active'>
           <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
@@ -36,7 +41,7 @@
     </ul>
     <ul class="nav navbar-nav">
         <li><%= link_to("Sale Items", sale_items_path) %></li>
-        <li> <%= link_to ("Categories"), categories_path %></li>
+        <li> <%= link_to("Categories", categories_path) %></li>
         <li><%= link_to("Wish List", wishlists_path) %></li>
         <li><%= link_to("Address Book", addresses_path) %></li>
     </ul>

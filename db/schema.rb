@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106164417) do
+ActiveRecord::Schema.define(version: 20151107045535) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "user_id",    null: false
@@ -34,8 +34,39 @@ ActiveRecord::Schema.define(version: 20151106164417) do
 
   add_index "categories", ["category_id"], name: "index_categories_on_category_id"
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "sale_item_id"
+    t.integer  "order_id"
+    t.decimal  "unit_price",   precision: 12, scale: 2
+    t.integer  "quantity"
+    t.decimal  "total_price",  precision: 12, scale: 2
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
+  add_index "order_items", ["sale_item_id"], name: "index_order_items_on_sale_item_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.decimal  "subtotal",        precision: 12, scale: 2
+    t.decimal  "tax",             precision: 12, scale: 2
+    t.decimal  "shipping",        precision: 12, scale: 2
+    t.decimal  "total",           precision: 12, scale: 2
+    t.integer  "order_status_id"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "orders", ["order_status_id"], name: "index_orders_on_order_status_id"
+
+  create_table "orderstatuses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sale_items", force: :cascade do |t|
-    t.text     "user"
+    t.string   "user_id"
     t.string   "item_name"
     t.text     "item_description"
     t.float    "item_price"
