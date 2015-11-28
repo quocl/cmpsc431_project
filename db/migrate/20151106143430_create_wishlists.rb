@@ -4,6 +4,7 @@ class CreateWishlists < ActiveRecord::Migration
       t.belongs_to :user, index: true
       t.string :name
       t.string :user_id, foreign_key: true
+      t.string :shared
 
       t.timestamps null: false
     end

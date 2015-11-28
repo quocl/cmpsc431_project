@@ -14,7 +14,7 @@
         <h4 class="text-right">Unit Price: <span style="color: green">
           <%= number_to_currency sale_item.item_price %></span></h4>
         <div class="input-group">
-          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1, size: 5 %>
         <div class="input-group-btn">
             <%= f.hidden_field :sale_item_id, value: sale_item.id %>
             <%= f.submit "Add to Cart", class: "btn btn-primary" %>
