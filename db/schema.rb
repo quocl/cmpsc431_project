@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 20151107045535) do
   end
 
   create_table "sale_items", force: :cascade do |t|
-    t.string   "user_id"
     t.string   "item_name"
     t.text     "item_description"
     t.float    "item_price"
