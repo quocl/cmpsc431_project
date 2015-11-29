@@ -6,7 +6,7 @@
       <h4><%= sale_item.item_name %></small></h4>
     </div>
     <div class="col-xs-8">
-      <h5><%= "Seller: #{sale_item.user_id}" %></small></h5>
+      <h5><%= "Seller: #{sale_item.user_id}" rescue nil%></small></h5>
     </div>
     <div class="col-xs-4">
       <%= form_for order_item, remote: true do |f| %>
