@@ -21,8 +21,8 @@
           <%= render 'layouts/cart_text' %>
         </li>
         <li>
-          <% if current_user != nil and current_user.email != nil %>
-            <%= link_to "#{current_user.email}", profile_path %>
+          <% if current_user != nil and current_user.first_name != nil and current_user.last_name != nil %>
+            <%= link_to "#{current_user.first_name} #{current_user.last_name}" , profile_path %>
           <%end %>
         </li>
         <li class='active'>
