@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sale_item_id: 
+  wishlist_id: 
+  unit_price: 9.99
+  quantity: 1
+  total_price: 9.99
+
+two:
+  sale_item_id: 
+  wishlist_id: 
+  unit_price: 9.99
+  quantity: 1
+  total_price: 9.99
