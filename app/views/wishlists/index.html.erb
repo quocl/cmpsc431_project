@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+<% if current_user.present? %>
+<h1>Personal Wishlists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Wishlist Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wishlists1.each do |wishlist| %>
+      <tr>
+        <td><%= wishlist.name %></td>
+        <td>&nbsp</td>
+        <td><%= link_to 'Show', wishlist %></td>
+        <td>&nbsp</td>
+        <td><%= link_to 'Edit', edit_wishlist_path(wishlist) %></td>
+        <td>&nbsp</td>
+        <td><%= link_to 'Destroy', wishlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<% end %>
+<br>
+
+<h1>Public Wishlists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Wishlist Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wishlists2.each do |wishlist| %>
+      <tr>
+        <td><%= wishlist.name %></td>
+        <td>&nbsp</td>
+        <td><%= wishlist.user_id %></td>
+        <td>&nbsp</td>
+        <td><%= link_to 'Show', wishlist %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<br>
+
+<%= link_to 'New Wishlist', new_wishlist_path %>

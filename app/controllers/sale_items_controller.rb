@@ -1,10 +1,11 @@
 class SaleItemsController < ApplicationController
   before_action :set_sale_item, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!, :only => [:edit, :update, :destroy, :create]
   # GET /sale_items
   # GET /sale_items.json
   def index
     @sale_items = SaleItem.all
+    @order_item = current_order.order_items.new
   end
 
   # GET /sale_items/1
@@ -24,7 +25,11 @@ class SaleItemsController < ApplicationController
   # POST /sale_items
   # POST /sale_items.json
   def create
-    @sale_item = SaleItem.new(sale_item_params)
+    @sale_item = SaleItem.new(item_name: params[:sale_item][:item_name],
+                              item_description: params[:sale_item][:item_description],
+                              item_price: params[:sale_item][:item_price],
+                              item_location: params[:sale_item][:item_location],
+                              user_id: current_user.email)
 
     respond_to do |format|
       if @sale_item.save
@@ -69,6 +74,6 @@ class SaleItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sale_item_params
-      params.require(:sale_item).permit(:item_name, :item_description, :item_price, :item_location)
+      params.require(:sale_item).permit(:user_id, :item_name, :item_description, :item_price, :item_location)
     end
 end
