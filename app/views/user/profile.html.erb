@@ -50,7 +50,15 @@
           <td><%= card.card_number %></td>
           <td><%= card.name %></td>
           <td><%= card.expiration %></td>
-          <td><%= card.card_type %></td>
+          
+          <% if card.card_type == 'visa'%>
+              <td><%= image_tag '/visacard.png' %></td>
+          <% elsif card.card_type == 'master' %>
+              <td><%= image_tag '/mastercard.png' %></td>
+          <%else%>
+              <td><%= card.card_type %></td>
+          <%end%>
+          
           <td><%= card.security_code %></td>
           <td><%= link_to 'Edit', edit_card_path(card),:class=>"btn btn-primary btn-xs" %> | <%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger btn-xs" %></td>
         </tr>

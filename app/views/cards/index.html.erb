@@ -2,7 +2,7 @@
 
 <h1>Listing Cards</h1>
 
-<table>
+<table class ="table table-stripped">
   <thead>
     <tr>
       <th>Number</th>
@@ -20,7 +20,13 @@
         <td><%= card.card_number %></td>
         <td><%= card.name %></td>
         <td><%= card.expiration %></td>
-        <td><%= card.card_type %></td>
+        <% if card.card_type == 'visa'%>
+              <td><%= image_tag '/visacard.png' %></td>
+          <% elsif card.card_type == 'master' %>
+              <td><%= image_tag '/mastercard.png' %></td>
+          <%else%>
+              <td><%= card.card_type %></td>
+          <%end%>
         <td><%= card.user_id %></td>
         <td><%= link_to 'Show', card %></td>
         <td><%= link_to 'Edit', edit_card_path(card) %></td>
