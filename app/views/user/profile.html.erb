@@ -1,9 +1,34 @@
 <h2>Hello <%= @user.email%></h2>
 <h4>
 	Address
-	
 </h4>
+<div>
+   <table>
+  <thead>
+    <tr>
+      <th>Street</th>
+      <th>City</th>
+      <th>Zip Code</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
+  <tbody>
+    <% @user.addresses.each do |address| %>
+      <tr>
+        <td><%= address.street %></td>
+        <td><%= address.city %></td>
+        <td><%= address.zipcode %></td>
+        <td><%= link_to 'Edit', edit_address_path(address), :class=>"btn btn-primary btn-mini" %></td>
+        <td><%= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-mini" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Add address', new_address_path, :class => "btn btn-small btn-primary"%>
+<hr>
+</div>
 <h4>
 	Payment information
 </h4>

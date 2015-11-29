@@ -28,7 +28,7 @@ class AddressesController < ApplicationController
                            city: params[:address][:city],
                            zipcode: params[:address][:zipcode],
                            addrType: params[:address][:addrType],
-                           user_id: current_user.email)
+                           user_id: current_user.id)
     respond_to do |format|
       if @address.save
         format.html { redirect_to @address, notice: 'Address was successfully created.' }
