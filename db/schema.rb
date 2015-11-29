@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129200752) do
+ActiveRecord::Schema.define(version: 20151129222757) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(version: 20151129200752) do
   end
 
   add_index "addresses", ["street"], name: "index_addresses_on_street"
+
+  create_table "cards", force: :cascade do |t|
+    t.string   "card_number"
+    t.string   "name"
+    t.date     "expiration"
+    t.string   "card_type"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "security_code"
+  end
+
+  add_index "cards", ["user_id"], name: "index_cards_on_user_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"

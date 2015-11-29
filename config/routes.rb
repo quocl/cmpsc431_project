@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       get :sale_items
     end
   end
+
+  resources :cards
   resources :sale_items
   resources :wishlists
   resource :carts, only: [:show]

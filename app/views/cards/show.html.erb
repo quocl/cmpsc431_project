@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @card.card_number %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @card.name %>
+</p>
+
+<p>
+  <strong>Expiration:</strong>
+  <%= @card.expiration %>
+</p>
+
+<p>
+  <strong>Card type:</strong>
+  <%= @card.card_type %>
+</p>
+
+<p>
+  <strong>Security Code</strong>
+  <%= @card.security_code %>
+</p>
+
+<%= link_to 'Edit', edit_card_path(@card), :class => 'btn btn-primary btn-sm' %> |
+<%= link_to 'Back', cards_path, :class => 'btn btn-sm'%>
