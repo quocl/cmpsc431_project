@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151129222757) do
+=======
+ActiveRecord::Schema.define(version: 20151129213845) do
+>>>>>>> wentao
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -79,6 +83,7 @@ ActiveRecord::Schema.define(version: 20151129222757) do
   end
 
   create_table "sale_items", force: :cascade do |t|
+    t.string   "user_id"
     t.string   "item_name"
     t.text     "item_description"
     t.float    "item_price"
@@ -111,12 +116,26 @@ ActiveRecord::Schema.define(version: 20151129222757) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
+  create_table "wishlist_items", force: :cascade do |t|
+    t.integer  "sale_item_id"
+    t.integer  "wishlist_id"
+    t.decimal  "unit_price",   precision: 10, scale: 2
+    t.integer  "quantity"
+    t.decimal  "total_price",  precision: 10, scale: 2
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "wishlist_items", ["sale_item_id"], name: "index_wishlist_items_on_sale_item_id"
+  add_index "wishlist_items", ["wishlist_id"], name: "index_wishlist_items_on_wishlist_id"
+
   create_table "wishlists", force: :cascade do |t|
     t.string   "user_id"
     t.string   "name"
     t.string   "shared"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.decimal  "subtotal",   precision: 10, scale: 2
   end
 
   add_index "wishlists", ["user_id"], name: "index_wishlists_on_user_id"

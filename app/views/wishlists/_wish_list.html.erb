@@ -1,0 +1,22 @@
+<% if !@wishlist_item.nil? && @wishlist_item.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+    <% @wishlist_item.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @wishlist_items.size == 0 %>
+  <p class="text-center">
+    There is no item in your list.
+  </p>
+<% else %>
+  <% @order_items.each do |order_item| %>
+    <%= render 'wishlists/list_row', sale_item: wishlist_item.sale_item, show_total: true %>
+<% end %>
+
+<%= link_to "Check out" %>
+
+<% end %>

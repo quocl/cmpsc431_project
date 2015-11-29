@@ -6,6 +6,7 @@ class SaleItemsController < ApplicationController
   def index
     @sale_items = SaleItem.all
     @order_item = current_order.order_items.new
+    # @wishlists = Wishlists.where("user_id = ?", current_user.email)
   end
 
   # GET /sale_items/1

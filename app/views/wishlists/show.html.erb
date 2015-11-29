@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <strong>Name:</strong>
-  <%= @wishlist.name %>
-</p>
+<div class="wish-list">
+  <%= render "wish_list" %>
+</div>
 
-<td><%= link_to 'Edit', edit_wishlist_path(@wishlist) %></td> 
-<td><%= link_to 'Back', wishlists_path %></td>
+
+<%= link_to 'Back', wishlists_path %>
