@@ -29,7 +29,8 @@ class SaleItemsController < ApplicationController
                               item_description: params[:sale_item][:item_description],
                               item_price: params[:sale_item][:item_price],
                               item_location: params[:sale_item][:item_location],
-                              user_id: current_user.email)
+                              user_id: current_user.email,
+                              category_id: params[:sale_item][:category_id])
 
     respond_to do |format|
       if @sale_item.save

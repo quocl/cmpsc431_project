@@ -29,7 +29,6 @@ class AddressesController < ApplicationController
                            zipcode: params[:address][:zipcode],
                            addrType: params[:address][:addrType],
                            user_id: current_user.email)
-
     respond_to do |format|
       if @address.save
         format.html { redirect_to @address, notice: 'Address was successfully created.' }

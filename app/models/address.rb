@@ -3,4 +3,6 @@ validates :zipcode, length: { is: 5 }, numericality: { only_integer: true } , pr
 validates :street , presence: true
 validates :city , presence: true 
 validates :addrType , presence: true
+
+belongs_to :user
 end

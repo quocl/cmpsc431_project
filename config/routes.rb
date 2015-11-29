@@ -6,6 +6,14 @@ Rails.application.routes.draw do
 
   resources :addresses
   devise_for :users
+  
+  match 'profile' => 'user#profile', via: :get
+  match 'manage_address' => 'addresses#edit', via: :get
+
+  resources :categories do
+    resources :sale_items do
+    end
+  end
   resources :categories do
     member do
       get :sale_items
