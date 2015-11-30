@@ -5,4 +5,5 @@ validates :city , presence: true
 validates :addrType , presence: true
 
 belongs_to :user
+belongs_to :delivery
 end

@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
   
+  get 'delivery/new'
+
+  get 'delivery/create'
+
+  get 'delivery/edit'
+
+  get 'delivery/update'
+
+  get 'delivery/delete'
+
+  get 'delivery/destory'
+
   get 'carts/show'
 
   resources :addresses
