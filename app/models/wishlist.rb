@@ -4,6 +4,7 @@ class Wishlist < ActiveRecord::Base
   validates :user_id, presence: true
   validates_uniqueness_of :name, scope: [:user_id]
   has_many :wishlist_items
+  has_many :sale_items, :through => :wishlist_items
 
   def subtotal
     wishlist_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum

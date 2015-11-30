@@ -5,6 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Sale_items.delete_all
+Orders.delete_all
+
+
 Orderstatus.delete_all
 Orderstatus.create! id: 1, name: "Preparing to ship"
 Orderstatus.create! id: 2, name: "Shipping now"

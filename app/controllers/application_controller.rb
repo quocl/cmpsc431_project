@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
       session[:previous_url] = request.fullpath 
     end
   end
+
   def current_order
       if !session[:order_id].nil?
         Order.find(session[:order_id])

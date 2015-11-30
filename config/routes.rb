@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
-  get 'order_items/create'
-  get 'order_items/update'
-  get 'order_items/destroy'
+  
   get 'carts/show'
 
   resources :addresses
   devise_for :users
-  
-  match 'profile' => 'user#profile', via: :get
-  match 'manage_address' => 'addresses#edit', via: :get
 
   resources :categories do
     resources :sale_items do
@@ -26,6 +21,11 @@ Rails.application.routes.draw do
   resource :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
   root to: "sale_items#index"
+
+
+  
+  match 'profile' => 'user#profile', via: :get
+  match 'manage_address' => 'addresses#edit', via: :get
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

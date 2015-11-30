@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151129222757) do
-=======
-ActiveRecord::Schema.define(version: 20151129213845) do
->>>>>>> wentao
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id",    null: false

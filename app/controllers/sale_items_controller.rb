@@ -1,12 +1,12 @@
 class SaleItemsController < ApplicationController
   before_action :set_sale_item, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :only => [:edit, :update, :destroy, :create]
+  
   # GET /sale_items
   # GET /sale_items.json
   def index
     @sale_items = SaleItem.all
     @order_item = current_order.order_items.new
-    # @wishlists = Wishlists.where("user_id = ?", current_user.email)
   end
 
   # GET /sale_items/1

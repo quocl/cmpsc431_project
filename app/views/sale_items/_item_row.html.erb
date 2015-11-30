@@ -2,12 +2,15 @@
 <div class="well">
 
   <div class="row">
+
     <div class="col-xs-8">
       <h4><%= sale_item.item_name %></small></h4>
     </div>
+
     <div class="col-xs-8">
       <h5><%= "Seller: #{sale_item.user_id}" rescue nil%></small></h5>
     </div>
+
     <div class="col-xs-4">
       <%= form_for order_item, remote: true do |f| %>
       
@@ -23,6 +26,24 @@
       
       <% end %>
     </div>
+
+    <div class="col-xs-4">
     
+          <select onchange="f.submit()">
+          <% current_user.wishlists.each do |wishlist| %>
+          <option>
+          <%= wishlist.name %>
+          </option>>
+          <% end %>
+
+          </select>
+          
+    
+    </div>
+    
+    
+
+
+
   </div>
 </div>

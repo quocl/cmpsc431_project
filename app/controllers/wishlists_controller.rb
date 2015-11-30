@@ -5,7 +5,7 @@ class WishlistsController < ApplicationController
   # GET /wishlists.json
   def index
     if current_user.present?
-      @wishlists1 = Wishlist.where("user_id = ?", current_user.email)
+      @wishlists1 = current_user.wishlists
     end
     @wishlists2 = Wishlist.where("shared =?", 'public')
   end
@@ -31,6 +31,7 @@ class WishlistsController < ApplicationController
     @wishlist = Wishlist.new(name: params[:wishlist][:name],
                        user_id: current_user.email,
                        shared: params[:wishlist][:shared])
+    current_user.wishlists << @wishlist
     respond_to do |format|
       if @wishlist.save
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully created.' }
