@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
   
-  get 'delivery/new'
+  get 'deliveries/new'
 
-  get 'delivery/create'
+  get 'deliveries/create'
 
-  get 'delivery/edit'
+  get 'deliveries/edit'
+  get 'deliveries/index'
 
-  get 'delivery/update'
+  get 'deliveries/update'
 
-  get 'delivery/delete'
+  get 'deliveries/delete'
 
-  get 'delivery/destory'
+  get 'deliveries/destory'
 
   get 'carts/show'
 

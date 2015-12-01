@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :addresses
   has_many :cards
   has_many :wishlists
+  has_many :deliveries
   validates :email, :first_name, :last_name, :username, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
