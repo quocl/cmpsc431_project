@@ -122,3 +122,73 @@
      </table>
 <% end %>
 </div>
+
+<hr>
+
+<h4>Wishlists</h4>
+
+<table class = "table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Item amount</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @current_user.wishlists.size == 0%>
+      <tr><td>You don't have any wishlist yet.</td></tr>
+    <% else %>
+      <% @current_user.wishlists.each do |wishlist| %>
+        <tr>
+          <td><%= wishlist.name %></td>
+          <td>&nbsp</td>
+          <td><%= link_to 'Show', wishlist %></td>
+          <td>&nbsp</td>
+          <td><%= link_to 'Edit', edit_wishlist_path(wishlist) %></td>
+          <td>&nbsp</td>
+          <td><%= link_to 'Destroy', wishlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+
+  </tbody>
+
+</table>
+<%= link_to 'New Wishlist', new_wishlist_path , class: "btn btn-primary" %>
+<br>
+
+<h4>Your items</h4>
+
+<table class = "table table-striped">
+  <thead>
+    <tr>
+      <th>Item name</th>
+      <th>Item amount</th>
+      <th>Price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @current_user.wishlists.size == 0%>
+      <tr><td>You don't have any wishlist yet.</td></tr>
+    <% else %>
+      <% @current_user.wishlists.each do |wishlist| %>
+        <tr>
+          <td><%= wishlist.name %></td>
+          <td>&nbsp</td>
+          <td><%= link_to 'Show', wishlist %></td>
+          <td>&nbsp</td>
+          <td><%= link_to 'Edit', edit_wishlist_path(wishlist) %></td>
+          <td>&nbsp</td>
+          <td><%= link_to 'Destroy', wishlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+
+  </tbody>
+
+</table>
+<%= link_to 'New Wishlist', new_wishlist_path , class: "btn btn-primary" %>
+<br>
