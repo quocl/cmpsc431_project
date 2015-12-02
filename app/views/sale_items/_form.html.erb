@@ -29,16 +29,14 @@
   </div>
   <div class="field">
     <%= f.label :category_id %><br>
-    <select>
+    <select name="sale_item[category_id]" id="sale_item_category_id">
           <% if @categories.nil? %>
               <option>
                 You don't have a category yet.
               </option>
           <% else %>
               <% @categories.each do |category| %>
-              <option>
-                <%= category.name %>
-              </option>>
+              <option value=<%= category.id%>><%= category.name%></option>
               <% end %>
           <% end %>
 
