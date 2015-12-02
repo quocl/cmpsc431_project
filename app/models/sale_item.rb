@@ -6,4 +6,6 @@ class SaleItem < ActiveRecord::Base
     validates_uniqueness_of :item_name, scope: [:user]
     has_many :order_items
     has_many :wishlist_items
+    has_one :category
+    belongs_to :category
 end

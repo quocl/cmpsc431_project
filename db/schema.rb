@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129222757) do
+ActiveRecord::Schema.define(version: 20151202144803) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -46,6 +46,21 @@ ActiveRecord::Schema.define(version: 20151129222757) do
   end
 
   add_index "categories", ["category_id"], name: "index_categories_on_category_id"
+
+  create_table "deliveries", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "user_id"
+    t.integer  "address_id"
+    t.integer  "card_id"
+    t.string   "trackingnumber"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "deliveries", ["address_id"], name: "index_deliveries_on_address_id"
+  add_index "deliveries", ["card_id"], name: "index_deliveries_on_card_id"
+  add_index "deliveries", ["order_id"], name: "index_deliveries_on_order_id"
+  add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id"
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "sale_item_id"
@@ -107,6 +122,7 @@ ActiveRecord::Schema.define(version: 20151129222757) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "username"
+    t.integer  "usergroup"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
