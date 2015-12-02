@@ -30,7 +30,7 @@ class SaleItemsController < ApplicationController
   # POST /sale_items.json
   def create
     @sale_item = SaleItem.new(sale_item_params)
-    @sale_item.user_id = current_user.id
+    @sale_item.user_id = current_user.email
 
     respond_to do |format|
       if @sale_item.save

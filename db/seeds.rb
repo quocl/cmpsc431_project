@@ -17,11 +17,11 @@ user3.save!
 
 
 SaleItem.delete_all
-a = SaleItem.create! id: 1, user_id: "1", item_name: "Dumb", item_price: 5, item_description: "This is a text item." , item_location: "PA"
-b = SaleItem.create! id: 2, user_id: "2", item_name: "Loofah", item_price: 6, item_description: "This is a text item." , item_location: "PA"
-c = SaleItem.create! id: 3, user_id: "3", item_name: "Coffee", item_price: 75, item_description: "This is a text item." , item_location: "PA"
-d = SaleItem.create! id: 4, user_id: "1", item_name: "Homebrew", item_price: 5.3, item_description: "This is a text item." , item_location: "PA"
-e = SaleItem.create! id: 5, user_id: "2", item_name: "Beautiful Soup", item_price: 5.31, item_description: "This is a text item." , item_location: "PA"
+a = SaleItem.create! id: 1, user_id: "PrimeJD@JD.com", item_name: "Dumb", item_price: 5, item_description: "This is a text item." , item_location: "PA"
+b = SaleItem.create! id: 2, user_id: "JD@JD.com", item_name: "Loofah", item_price: 6, item_description: "This is a text item." , item_location: "PA"
+c = SaleItem.create! id: 3, user_id: "PrimeJD@JD.com", item_name: "Coffee", item_price: 75, item_description: "This is a text item." , item_location: "PA"
+d = SaleItem.create! id: 4, user_id: "JD@JD.com", item_name: "Homebrew", item_price: 5.3, item_description: "This is a text item." , item_location: "PA"
+e = SaleItem.create! id: 5, user_id: "PrimeJD@JD.com", item_name: "Beautiful Soup", item_price: 5.31, item_description: "This is a text item." , item_location: "PA"
 a.save!
 b.save!
 c.save!
