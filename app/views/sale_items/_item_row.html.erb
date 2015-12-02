@@ -28,12 +28,17 @@
     </div>
 
     <div class="col-xs-4">
-    
-          <select onchange="f.submit()">
+          <select>
+          <% if current_user.wishlists.size == 0%>
+          <option>
+            You don't have a wishlst yet.
+          </option>
+          <% else %>
           <% current_user.wishlists.each do |wishlist| %>
           <option>
-          <%= wishlist.name %>
+            <%= wishlist.name %>
           </option>>
+          <% end %>
           <% end %>
 
           </select>
