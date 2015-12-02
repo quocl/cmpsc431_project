@@ -44,7 +44,9 @@
     <ul class="nav navbar-nav">
         <li><%= link_to("Sale Items", sale_items_path) %></li>
         <li><%= link_to("Wish List", wishlists_path) %></li>
+        <% if current_user != nil and current_user.usergroup = 0%>
           <li> <%= link_to("Categories", categories_path) %></li>
+        <%end%>
     </ul>
   </div>
   <div class="container">

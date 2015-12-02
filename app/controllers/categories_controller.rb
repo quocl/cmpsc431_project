@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     @category = Category.find(params[:id])
-    @child_categories = Category.where(category_id: params[:id])
+    @child_categories = @category.childcategories
   end
 
   def sale_items
@@ -75,6 +75,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name, :category_id)
+      params.require(:category).permit(:name)
     end
 end

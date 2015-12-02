@@ -29,7 +29,20 @@
   </div>
   <div class="field">
     <%= f.label :category_id %><br>
-    <%= f.text_field :category_id %>
+    <select>
+          <% if @categories.nil? %>
+              <option>
+                You don't have a category yet.
+              </option>
+          <% else %>
+              <% @categories.each do |category| %>
+              <option>
+                <%= category.name %>
+              </option>>
+              <% end %>
+          <% end %>
+
+    </select>
   </div>
 
   <div class="actions">

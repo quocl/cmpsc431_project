@@ -16,6 +16,7 @@ class SaleItemsController < ApplicationController
 
   # GET /sale_items/new
   def new
+    @categories = current_categories
     @sale_item = SaleItem.new
   end
 
@@ -30,7 +31,7 @@ class SaleItemsController < ApplicationController
                               item_description: params[:sale_item][:item_description],
                               item_price: params[:sale_item][:item_price],
                               item_location: params[:sale_item][:item_location],
-                              user_id: current_user_id,
+                              user_id: current_user.id,
                               category_id: params[:sale_item][:category_id])
 
     respond_to do |format|

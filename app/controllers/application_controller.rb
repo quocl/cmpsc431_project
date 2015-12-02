@@ -27,6 +27,11 @@ class ApplicationController < ActionController::Base
       end
   end
 
+  def current_categories
+    Category.all
+  end
+
+
   def after_sign_in_path_for(resource)
     session[:previous_url] || root_path
   end
