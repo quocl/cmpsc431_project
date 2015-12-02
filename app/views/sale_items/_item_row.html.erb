@@ -29,16 +29,22 @@
 
     <div class="col-xs-4">
           <select>
-          <% if current_user.wishlists.size == 0%>
-          <option>
-            You don't have a wishlst yet.
-          </option>
+          <% if !current_user.nil? %>
+            <% if current_user.wishlists.size == 0 %>
+              <option>
+                You don't have a wishlst yet.
+              </option>
+            <% else %>
+              <% current_user.wishlists.each do |wishlist| %>
+              <option>
+                <%= wishlist.name %>
+              </option>>
+              <% end %>
+            <% end %>
           <% else %>
-          <% current_user.wishlists.each do |wishlist| %>
-          <option>
-            <%= wishlist.name %>
-          </option>>
-          <% end %>
+            <option>
+                Register or login to save your item into a wishlist!
+              </option>
           <% end %>
 
           </select>
