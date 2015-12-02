@@ -31,6 +31,7 @@ class SaleItemsController < ApplicationController
   def create
     @sale_item = SaleItem.new(sale_item_params)
     @sale_item.user_id = current_user.email
+    current_user.sale_items << @sale_item
 
     respond_to do |format|
       if @sale_item.save
@@ -75,6 +76,6 @@ class SaleItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sale_item_params
-      params.require(:sale_item).permit(:user_id, :item_name, :item_description, :item_price, :item_location, :category_id)
+      params.require(:sale_item).permit(:user_id, :item_name, :item_description, :item_price, :item_location, :category_id, :amount)
     end
 end

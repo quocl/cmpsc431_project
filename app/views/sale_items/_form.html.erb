@@ -28,6 +28,10 @@
     <%= f.text_field :item_location %>
   </div>
   <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount %>
+  </div>
+  <div class="field">
     <%= f.label :category_id %><br>
     <select name="sale_item[category_id]" id="sale_item_category_id">
           <% if @categories.nil? %>

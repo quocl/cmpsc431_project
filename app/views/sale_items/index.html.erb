@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Listing Sale Items</h1>
+<% if @sale_items.size == 0%>
+<h1 align="center">Hey no one is selling!</h1>
+<%else%> 
+<h1>Sale Items</h1>
   <div class="row">
   <div class="col-xs-6">
     <% @sale_items.each do |sale_item| %>
@@ -8,7 +10,5 @@
     <% end %>
   </div>
 </div>
-
+<%end%>
 <br>
-
-<%= link_to 'New Sale item', new_sale_item_path%>

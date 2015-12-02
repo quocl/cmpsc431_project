@@ -13,7 +13,8 @@
 
     <div class="col-xs-4">
       <%= form_for order_item, remote: true do |f| %>
-      
+        <h5 class="text-right">Remaining amount: <span style="color: red">
+          <%= sale_item.amount %></span></h5>      
         <h4 class="text-right">Unit Price: <span style="color: green">
           <%= number_to_currency sale_item.item_price %></span></h4>
         <div class="input-group">
