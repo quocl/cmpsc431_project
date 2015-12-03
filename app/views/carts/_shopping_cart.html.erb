@@ -5,7 +5,7 @@
       <li><%= msg %></li>
     <% end %>
     </ul>
-  </div>
+  </div>""
 <% end %>
 
 <% if @order_items.size == 0 %>
@@ -17,4 +17,11 @@
     <%= render 'carts/cart_row', sale_item: order_item.sale_item, order_item: order_item, show_total: true %>
 <% end %>
 
+<h3 class="text-right">Total Price: <span style="color: green"><%= number_to_currency current_order.subtotal %></span></h3>
+<div class="text-right">
+<%= link_to "Check out" , "#",  class: "btn btn-success"%>
+</div>
+<div class="text-right">
+<%= link_to "Save to wishlist", "#",  class: "btn btn-warning"%>
+</div>
 <% end %>

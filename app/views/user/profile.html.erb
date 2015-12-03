@@ -1,0 +1,211 @@
+<h2>Hello <%= "#{@user.first_name} #{@user.last_name}" %></h2>
+<hr>
+<h4>
+	Address
+</h4>
+<div>
+   <table class = "table table-striped">
+  <thead>
+    <tr>
+      <th>Street</th>
+      <th>City</th>
+      <th>Zip Code</th>
+      <th ></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.addresses.each do |address| %>
+      <tr>
+        <td><%= address.street %></td>
+        <td><%= address.city %></td>
+        <td><%= address.zipcode %></td>
+        <td><%= link_to 'Edit', edit_address_path(address), :class=>"btn btn-primary btn-xs" %> | <%= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Add address', new_address_path, :class => "btn btn-primary btn-sm"%>
+</div>
+<hr>
+<h4>
+	Payment information
+</h4>
+
+<div>
+  <table class = "table table-striped">
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Name</th>
+        <th>Expiration</th>
+        <th>Card type</th>
+        <th>Security Code</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.cards.each do |card| %>
+        <tr>
+          <td><%= card.card_number %></td>
+          <td><%= card.name %></td>
+          <td><%= card.expiration %></td>
+          
+          <% if card.card_type == 'visa'%>
+              <td><%= image_tag '/visacard.png' %></td>
+          <% elsif card.card_type == 'master' %>
+              <td><%= image_tag '/mastercard.png' %></td>
+          <%else%>
+              <td><%= card.card_type %></td>
+          <%end%>
+          
+          <td><%= card.security_code %></td>
+          <td><%= link_to 'Edit', edit_card_path(card),:class=>"btn btn-primary btn-xs" %> | <%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger btn-xs" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Add Card', new_card_path, :class => "btn btn-primary btn-sm"%>
+</div>
+
+<hr>
+
+<div>
+  <h4>
+  Deliveries
+  </h4>
+  <table class = "table table-striped">
+    <thead>
+    <tr>
+      <th>Order</th>
+      <th>User</th>
+      <th>Address</th>
+      <th>Card</th>
+      <th>Trackingnumber</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+<% if @user.deliveries.size == 0 %>
+  <tbody>
+  <tr>
+  <td>  There is no delivery for you. </td>
+  </tr>
+  </tbody>
+  </table>
+<% else %>
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>User</th>
+      <th>Address</th>
+      <th>Card</th>
+      <th>Trackingnumber</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.deliveries.each do |delivery| %>
+      <tr>
+        <td><%= delivery.order %></td>
+        <td><%= delivery.user %></td>
+        <td><%= delivery.address %></td>
+        <td><%= delivery.card %></td>
+        <td><%= delivery.trackingnumber %></td>
+        <td><%= link_to 'Show Item Details', delivery %></td>
+        <td><%= link_to 'Change Details', edit_delivery_path(delivery) %></td>
+        <td><%= link_to 'Cancel', delivery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+     </table>
+<% end %>
+</div>
+
+<hr>
+
+<h4>Wishlists</h4>
+
+<table class = "table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Item amount</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @current_user.wishlists.size == 0%>
+      <tr><td>You don't have any wishlist yet.</td></tr>
+    <% else %>
+      <% @current_user.wishlists.each do |wishlist| %>
+        <tr>
+          <td><%= wishlist.name %></td>
+          <td>&nbsp</td>
+          <td><%= link_to 'Show', wishlist %></td>
+          <td>&nbsp</td>
+          <td><%= link_to 'Edit', edit_wishlist_path(wishlist) %></td>
+          <td>&nbsp</td>
+          <td><%= link_to 'Destroy', wishlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+
+  </tbody>
+
+</table>
+<%= link_to 'New Wishlist', new_wishlist_path , class: "btn btn-primary" %>
+<br>
+
+<h4>Your items</h4>
+
+<table class = "table table-striped">
+  <thead>
+    <tr>
+      <th>Item name</th>
+      <th>Item amount</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>Actions </th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @current_user.sale_items.size == 0%>
+      <tr><td>You don't have any item selling.</td></tr>
+    <% else %>
+      <% if @current_user.usergroup == 0%>
+        <% @sale_items.each do |sale_item| %>
+          <tr>
+            <td><%= sale_item.item_name %></td>
+            <td><%= sale_item.amount %></td>
+            <td><%= sale_item.item_price %></td>
+            <td><%= sale_item.category.name %>
+            <td><%= link_to 'Edit', edit_sale_item_path(sale_item) %>&nbsp
+            <%= link_to 'Unlist', sale_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      <%else%>  
+        <% @current_user.sale_items.each do |sale_item| %>
+          <tr>
+            <td><%= sale_item.item_name %></td>
+            <td><%= sale_item.amount %></td>
+            <td><%= sale_item.item_price %></td>
+            <td><%= sale_item.category.name %>
+            <td><%= link_to 'Edit', edit_sale_item_path(sale_item) %>&nbsp
+            <%= link_to 'Unlist', sale_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      <% end %>  
+    <% end %>
+
+  </tbody>
+
+</table>
+
+<%= link_to 'I wanna sell!', new_sale_item_path, class: "btn btn-primary"  %>
+
+<br>

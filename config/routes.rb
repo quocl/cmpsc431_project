@@ -1,23 +1,49 @@
 Rails.application.routes.draw do
-  get 'order_items/create'
-  get 'order_items/update'
-  get 'order_items/destroy'
+  
+  get 'deliveries/new'
+
+  get 'deliveries/create'
+
+  get 'deliveries/edit'
+  get 'deliveries/index'
+
+  get 'deliveries/update'
+
+  get 'deliveries/delete'
+
+  get 'deliveries/destory'
+
   get 'carts/show'
-  get 'product_reviews/index'
 
   resources :addresses
   devise_for :users
-  resources :categories 
+
+  resources :categories do
+    resources :sale_items do
+    end
+  end
+  resources :categories do
+    member do
+      get :sale_items
+    end
+  end 
   resources :sale_items do
     resources :product_reviews
   end
 
+  resources :cards
+  resources :sale_items
   resources :seller_reviews
   resources :wishlists
-  
+  resources :wishlist_items
   resource :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
   root to: "sale_items#index"
+
+
+  
+  match 'profile' => 'user#profile', via: :get
+  match 'manage_address' => 'addresses#edit', via: :get
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

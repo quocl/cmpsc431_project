@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151128180810) do
+ActiveRecord::Schema.define(version: 20151202185538) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "user_id",    null: false
+    t.integer  "user_id",    null: false
     t.text     "street",     null: false
     t.string   "city",       null: false
     t.integer  "zipcode",    null: false
@@ -25,6 +25,19 @@ ActiveRecord::Schema.define(version: 20151128180810) do
 
   add_index "addresses", ["street"], name: "index_addresses_on_street"
 
+  create_table "cards", force: :cascade do |t|
+    t.string   "card_number"
+    t.string   "name"
+    t.date     "expiration"
+    t.string   "card_type"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "security_code"
+  end
+
+  add_index "cards", ["user_id"], name: "index_cards_on_user_id"
+
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.integer  "category_id"
@@ -33,6 +46,21 @@ ActiveRecord::Schema.define(version: 20151128180810) do
   end
 
   add_index "categories", ["category_id"], name: "index_categories_on_category_id"
+
+  create_table "deliveries", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "user_id"
+    t.integer  "address_id"
+    t.integer  "card_id"
+    t.string   "trackingnumber"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "deliveries", ["address_id"], name: "index_deliveries_on_address_id"
+  add_index "deliveries", ["card_id"], name: "index_deliveries_on_card_id"
+  add_index "deliveries", ["order_id"], name: "index_deliveries_on_order_id"
+  add_index "deliveries", ["user_id"], name: "index_deliveries_on_user_id"
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "sale_item_id"
@@ -84,6 +112,7 @@ ActiveRecord::Schema.define(version: 20151128180810) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "category_id"
+    t.integer  "amount"
   end
 
   add_index "sale_items", ["category_id"], name: "index_sale_items_on_category_id"
@@ -111,16 +140,34 @@ ActiveRecord::Schema.define(version: 20151128180810) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "username"
+    t.integer  "usergroup"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
+  create_table "wishlist_items", force: :cascade do |t|
+    t.integer  "sale_item_id"
+    t.integer  "wishlist_id"
+    t.decimal  "unit_price",   precision: 12, scale: 2
+    t.integer  "quantity"
+    t.decimal  "total_price",  precision: 10, scale: 2
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  add_index "wishlist_items", ["sale_item_id"], name: "index_wishlist_items_on_sale_item_id"
+  add_index "wishlist_items", ["wishlist_id"], name: "index_wishlist_items_on_wishlist_id"
+
   create_table "wishlists", force: :cascade do |t|
     t.string   "user_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.decimal  "subtotal",   precision: 10, scale: 2
   end
 
   add_index "wishlists", ["user_id"], name: "index_wishlists_on_user_id"

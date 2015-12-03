@@ -20,5 +20,10 @@
   <%= @sale_item.item_location %>
 </p>
 
+<p>
+  <strong>Category:</strong>
+  <%= @categories.find(@sale_item.category_id).name %>
+</p>
+
 <%= link_to 'Edit', edit_sale_item_path(@sale_item) %> |
 <%= link_to 'Back', sale_items_path %>

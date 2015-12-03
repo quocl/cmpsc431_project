@@ -4,12 +4,16 @@ class WishlistsController < ApplicationController
   # GET /wishlists
   # GET /wishlists.json
   def index
-    @wishlists = Wishlist.where(user_id: current_user.email)
+    if current_user.present?
+      @wishlists1 = current_user.wishlists
+    end
+    @wishlists2 = Wishlist.where("shared =?", 'public')
   end
 
   # GET /wishlists/1
   # GET /wishlists/1.json
   def show
+    @wishlist_items = Wishlist.find(params[:id]).wishlist_items
   end
 
   # GET /wishlists/new
@@ -25,7 +29,9 @@ class WishlistsController < ApplicationController
   # POST /wishlists.json
   def create
     @wishlist = Wishlist.new(name: params[:wishlist][:name],
-                       user_id: current_user.email)
+                       user_id: current_user.email,
+                       shared: params[:wishlist][:shared])
+    current_user.wishlists << @wishlist
     respond_to do |format|
       if @wishlist.save
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully created.' }
@@ -73,7 +79,7 @@ class WishlistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wishlist_params
-      params.require(:wishlist).permit(:name, :user_id)
+      params.require(:wishlist).permit(:name, :user_id, :shared)
     end
 
 end

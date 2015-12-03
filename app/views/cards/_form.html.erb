@@ -1,0 +1,39 @@
+<%= form_for(@card) do |f| %>
+  <% if @card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+
+      <ul>
+      <% @card.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :card_number %><br>
+    <%= f.text_field :card_number %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :expiration %><br>
+    <%= f.date_select :expiration %>
+  </div>
+  <div class="field">
+    <%= f.label :card_type %><br>
+    <%= f.select :card_type, [['Visa','visa'],['Master','master']] %>
+  </div>
+  <div class="field">
+    <%= f.label :security_code %><br>
+    <%= f.text_field :security_code %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

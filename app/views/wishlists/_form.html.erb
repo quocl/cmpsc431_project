@@ -14,7 +14,10 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-
+  <div class="field">
+    <%= f.label :shared %><br>
+     <%= f.select :shared, [['Public','public'],['Private','private']] %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
