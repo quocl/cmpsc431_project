@@ -29,10 +29,7 @@ class WishlistItemsController < ApplicationController
     @wishlist_item = @wishlist.wishlist_items.find(params[:id])
     @wishlist_item.destroy
     @wishlist_items = @wishlist.wishlist_items
-    respond_to do |format|
-      if @wishlist_item.save
-        format.html {notice: 'Item was successfully added to wishlist.' }
-      end
+    @wishlist.save
   end
 
 private

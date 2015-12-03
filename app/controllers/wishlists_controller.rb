@@ -13,8 +13,9 @@ class WishlistsController < ApplicationController
   # GET /wishlists/1
   # GET /wishlists/1.json
   def show
-    @wishlist_items = Wishlist.find(params[:id]).wishlist_items
     @current_wishlist = Wishlist.find(params[:id])
+    @wishlist_items = @current_wishlist.wishlist_items
+    
   end
 
   # GET /wishlists/new
