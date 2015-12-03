@@ -37,11 +37,14 @@
     <div class="row"><div class="col-xs-1">&nbsp;</div></div>
     <div class="row">
       <div class="col-xs-1">&nbsp;</div>
+
       <div class="col-xs-7">
           <% if !current_user.nil? %>
+
             <% if current_user.wishlists.size == 0 %>
               <select><option>You don't have a wishlst yet.</option></select></div></div>
             <% else %>
+              
               <%= form_for wishlist_item, remote: true do |f| %>
                   <select name="wishlist_item[wishlist_id]" id="wishlist_item_wishlist_id">
                     <% current_user.wishlists.each do |wishlist| %>
@@ -54,10 +57,11 @@
                     <%= f.hidden_field :sale_item_id, value: sale_item.id %>
                     <div class=="col-xs-1 text-right"><%= f.submit "Add to wishlist", class: "btn btn-primary" %></div>
                   </div>
-      
 
               <% end %>
-            <% end %></div>
+              </div>
+            <% end %>
+
           <% else %>
 
             <select><option>Register or login to save your item into a wishlist!</option></select></div></div>

@@ -14,6 +14,7 @@ class WishlistsController < ApplicationController
   # GET /wishlists/1.json
   def show
     @wishlist_items = Wishlist.find(params[:id]).wishlist_items
+    @current_wishlist = Wishlist.find(params[:id])
   end
 
   # GET /wishlists/new
@@ -35,7 +36,7 @@ class WishlistsController < ApplicationController
     respond_to do |format|
       if @wishlist.save
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully created.' }
-        format.json { render :show, status: :created, location: @wishlist }
+        format.json { render :index, status: :created, location: @wishlist }
       else
         format.html { render :new }
         format.json { render json: @wishlist.errors, status: :unprocessable_entity }
@@ -49,7 +50,7 @@ class WishlistsController < ApplicationController
     respond_to do |format|
       if @wishlist.update(wishlist_params)
         format.html { redirect_to @wishlist, notice: 'Wishlist was successfully updated.' }
-        format.json { render :show, status: :ok, location: @wishlist }
+        format.json { render :index, status: :ok, location: @wishlist }
       else
         format.html { render :edit }
         format.json { render json: @wishlist.errors, status: :unprocessable_entity }
