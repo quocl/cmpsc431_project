@@ -13,10 +13,11 @@
     There is no item in this list.
   </p>
 <% else %>
-  <% @wishlist_items.each do |wishlist_item| %>
-    <%= render 'wishlists/list_row', sale_item: wishlist_item.sale_item, show_total: true %>
+
+      <% @wishlist_items.each do |wishlist_item| %>
+        <%= render 'wishlists/list_row', sale_item: wishlist_item.sale_item, wishlist_item: wishlist_item%>
+      <%end%>
+      
 <% end %>
 
 <%= link_to "Check out" %>
-
-<% end %>

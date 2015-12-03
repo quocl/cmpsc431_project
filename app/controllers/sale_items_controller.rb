@@ -7,6 +7,8 @@ class SaleItemsController < ApplicationController
   def index
     @sale_items = SaleItem.all
     @order_item = current_order.order_items.new
+    @wishlist_item = WishlistItem.new
+    @users = User.all
   end
 
   # GET /sale_items/1
@@ -30,7 +32,6 @@ class SaleItemsController < ApplicationController
   # POST /sale_items.json
   def create
     @sale_item = SaleItem.new(sale_item_params)
-    @sale_item.user_id = current_user.email
     current_user.sale_items << @sale_item
 
     respond_to do |format|

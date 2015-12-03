@@ -8,7 +8,7 @@
     </div>
 
     <div class="col-xs-8">
-      <h5><%= "Seller: #{sale_item.user_id}" rescue nil%></small></h5>
+      <h5><%= "Seller: #{users.find(sale_item.user_id).email}" rescue nil%></small></h5>
     </div>
 
     <div class="col-xs-4">
@@ -17,38 +17,49 @@
           <%= sale_item.amount %></span></h5>      
         <h4 class="text-right">Unit Price: <span style="color: green">
           <%= number_to_currency sale_item.item_price %></span></h4>
-        <div class="input-group">
+        <div class="input-group col-xs-1">
           <%= f.number_field :quantity, value: 1, class: "form-control", min: 1, size: 5 %>
-        <div class="input-group-btn">
+          <div class="col-xs-12">&nbsp;</div>
+        <div class="input-group-btn col-xs-5">
             <%= f.hidden_field :sale_item_id, value: sale_item.id %>
             <%= f.submit "Add to Cart", class: "btn btn-primary" %>
         </div>
         </div>
+        
       
       <% end %>
     </div>
 
-    <div class="col-xs-4">
-          <select>
+  </div>  
+    <div class="row"><div class="col-xs-1">&nbsp;</div></div>
+    <div class="row">
+      <div class="col-xs-1">&nbsp;</div>
+      <div class="col-xs-7">
           <% if !current_user.nil? %>
             <% if current_user.wishlists.size == 0 %>
-              <option>
-                You don't have a wishlst yet.
-              </option>
+              <select><option>You don't have a wishlst yet.</option></select>
             <% else %>
-              <% current_user.wishlists.each do |wishlist| %>
-              <option>
-                <%= wishlist.name %>
-              </option>>
+              <%= form_for wishlist_item, remote: true do |f| %>
+                  <select name="wishlist_item[wishlist_id]" id="wishlist_item_wishlist_id">
+                    <% current_user.wishlists.each do |wishlist| %>
+                      <option value=<%= wishlist.id%>><%= wishlist.name%></option>
+                    <% end %>
+                  </select>
+                  </div>
+                  
+                  <div class="col-xs-3">
+                    <%= f.hidden_field :sale_item_id, value: sale_item.id %>
+                    <div class=="col-xs-1 text-right"><%= f.submit "Add to wishlist", class: "btn btn-primary" %></div>
+                  </div>
+      
+
               <% end %>
             <% end %>
           <% else %>
-            <option>
-                Register or login to save your item into a wishlist!
-              </option>
+            <select><option>Register or login to save your item into a wishlist!</option></select>
           <% end %>
 
-          </select>
+          
           
     
     </div>

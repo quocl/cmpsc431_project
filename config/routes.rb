@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :cards
   resources :sale_items
   resources :wishlists
+  resources :wishlist_items
   resource :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
   root to: "sale_items#index"
