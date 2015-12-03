@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 20151202185538) do
   end
 
   create_table "sale_items", force: :cascade do |t|
-    t.string   "user_id"
     t.string   "item_name"
     t.text     "item_description"
     t.float    "item_price"
@@ -152,7 +151,7 @@ ActiveRecord::Schema.define(version: 20151202185538) do
   create_table "wishlist_items", force: :cascade do |t|
     t.integer  "sale_item_id"
     t.integer  "wishlist_id"
-    t.decimal  "unit_price",   precision: 12, scale: 2
+    t.decimal  "unit_price",   precision: 10, scale: 2
     t.integer  "quantity"
     t.decimal  "total_price",  precision: 10, scale: 2
     t.datetime "created_at",                            null: false
