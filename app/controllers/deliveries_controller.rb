@@ -14,6 +14,7 @@ class DeliveriesController < ApplicationController
 
   # GET /deliveries/new
   def new
+    @order = current_order
     @delivery = Delivery.new
   end
 
@@ -24,11 +25,16 @@ class DeliveriesController < ApplicationController
   # POST /deliveries
   # POST /deliveries.json
   def create
+    @order = current_order
     @delivery = Delivery.new(delivery_params)
-
+    @delivery.order_id = @order.id
+    @delivery.user_id = current_user.id
+    @addresses = current_user.addresses
+    @cards = current_user.cards
+    
     respond_to do |format|
       if @delivery.save
-        format.html { redirect_to @delivery, notice: 'Delivery was successfully created.' }
+        format.html { redirect_to @delivery, notice: 'Order was successfully placed.' }
         format.json { render :show, status: :created, location: @delivery }
       else
         format.html { render :new }
@@ -42,7 +48,7 @@ class DeliveriesController < ApplicationController
   def update
     respond_to do |format|
       if @delivery.update(delivery_params)
-        format.html { redirect_to @delivery, notice: 'Delivery was successfully updated.' }
+        format.html { redirect_to @delivery, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @delivery }
       else
         format.html { render :edit }
@@ -56,7 +62,7 @@ class DeliveriesController < ApplicationController
   def destroy
     @delivery.destroy
     respond_to do |format|
-      format.html { redirect_to deliveries_url, notice: 'Delivery was successfully destroyed.' }
+      format.html { redirect_to deliveries_url, notice: 'Order was successfully canceled.' }
       format.json { head :no_content }
     end
   end
