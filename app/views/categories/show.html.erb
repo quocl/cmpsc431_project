@@ -7,10 +7,10 @@
 
 <p>
   <strong>Parent Category:</strong>
-  <%= link_to "#{@category.parentcategory.name}", category_path(:id => @category.parentcategory.id) rescue nil %>
+  <%= link_to "#{@category.category.name}", category_path(:id => @category.category_id) rescue nil %>
 </p>
 
-<table>
+<table class ="table table-striped">
   <thead>
     <tr>
       <th>Child Categories</th>
