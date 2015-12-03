@@ -18,10 +18,10 @@ Rails.application.routes.draw do
   resources :addresses
   devise_for :users
 
-  resources :categories do
-    resources :sale_items do
-    end
-  end
+  # resources :categories do
+  #   resources :sale_items do
+  #   end
+  # end
   resources :categories do
     member do
       get :sale_items
