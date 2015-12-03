@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202185538) do
+ActiveRecord::Schema.define(version: 20151203165209) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -93,8 +93,18 @@ ActiveRecord::Schema.define(version: 20151202185538) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_reviews", force: :cascade do |t|
+    t.string   "item_id"
+    t.string   "item_name"
+    t.float    "rating"
+    t.text     "review_title"
+    t.text     "review_content"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "sale_items", force: :cascade do |t|
-    t.string   "user_id"
+    t.integer  "user_id"
     t.string   "item_name"
     t.text     "item_description"
     t.float    "item_price"
@@ -106,6 +116,16 @@ ActiveRecord::Schema.define(version: 20151202185538) do
   end
 
   add_index "sale_items", ["category_id"], name: "index_sale_items_on_category_id"
+
+  create_table "seller_reviews", force: :cascade do |t|
+    t.string   "seller_id"
+    t.string   "reviewer_id"
+    t.float    "rating"
+    t.text     "review_title"
+    t.text     "review_content"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

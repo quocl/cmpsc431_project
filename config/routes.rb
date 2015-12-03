@@ -18,18 +18,22 @@ Rails.application.routes.draw do
   resources :addresses
   devise_for :users
 
-  resources :categories do
-    resources :sale_items do
-    end
-  end
+  # resources :categories do
+  #   resources :sale_items do
+  #   end
+  # end
   resources :categories do
     member do
       get :sale_items
     end
+  end 
+  resources :sale_items do
+    resources :product_reviews
   end
 
   resources :cards
   resources :sale_items
+  resources :seller_reviews
   resources :wishlists
   resources :wishlist_items
   resource :carts, only: [:show]

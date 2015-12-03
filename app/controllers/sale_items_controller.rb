@@ -1,3 +1,4 @@
+
 class SaleItemsController < ApplicationController
   before_action :set_sale_item, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :only => [:edit, :update, :destroy, :create]

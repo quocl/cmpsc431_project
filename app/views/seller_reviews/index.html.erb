@@ -1,0 +1,32 @@
+<h3>Seller Reviews:</h3>
+
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @seller_reviews.each do |sellerReview| %>
+
+      <tr height = "40" style="vertical-align:bottom">
+        <td><i>Rating: <%= sellerReview.rating %> / 5</i></td>
+      </tr>
+
+      <tr>
+        <td><b><%= sellerReview.review_title %></b></td>
+      </tr>
+
+      <tr>
+        <td><%= sellerReview.review_content %></td>
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Review', new_seller_review_path %>

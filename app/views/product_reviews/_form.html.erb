@@ -1,0 +1,30 @@
+<%= debug @idToGet %>
+<p>
+  <b>Title:</b>
+  <%= @idToGet %>
+</p>
+
+<%= form_for(@product_review) do |pr| %>
+
+  <div class="field">
+    <%= pr.label :rating %><br>
+    <%= pr.text_field :rating %>
+  </div>
+
+  <div class="field">
+    <%= pr.label :review_title %><br>
+    <%= pr.text_field :review_title %>
+  </div>
+
+  <div class="field">
+    <%= pr.label :review_content %><br>
+    <%= pr.text_area :review_content %>
+  </div>
+
+  <%= pr.hidden_field :item_id, :value => @idToGet %>
+
+  <div class="actions">
+    <%= pr.submit %>
+  </div>
+
+<% end %>

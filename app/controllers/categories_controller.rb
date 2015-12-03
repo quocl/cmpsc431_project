@@ -20,6 +20,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
+    @categories = Category.all # parent categories to choose from
     @category = Category.new
   end
 
@@ -31,7 +32,7 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
-
+    #@category.category_id = params[:category_id]
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
@@ -75,6 +76,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name)
+      params.require(:category).permit(:name, :category_id)
     end
 end
