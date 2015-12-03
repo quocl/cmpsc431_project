@@ -3,18 +3,13 @@ class WishlistItemsController < ApplicationController
     @wishlist = current_user.wishlists.find(wishlist_item_params[:wishlist_id])
     if !@wishlist.wishlist_items.find_by sale_item_id: wishlist_item_params[:sale_item_id]
       @wishlist_item = @wishlist.wishlist_items.new(wishlist_item_params)
+      @wishlist_item.save
     else
       @wishlist_item = @wishlist.wishlist_items.find_by sale_item_id: wishlist_item_params[:sale_item_id]
       @wishlist_item.save
       @wishlist.save
     end
 
-    respond_to do |format|
-      if @wishlist_item.save
-        format.html { redirect_to @wishlist, notice: 'Item was successfully added to wishlist.' }
-        format.json { render :index, location: @wishlist }
-      end
-    end
   end
 
   def update

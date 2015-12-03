@@ -1,6 +1,7 @@
 
 <div class="well">
 
+
   <div class="row">
     <div class="col-xs-8">
       <h4><%= sale_item.item_name %></small></h4>
@@ -13,6 +14,16 @@
 
     <div class="col-xs-4">
       <%= form_for order_item, remote: true do |f| %>
+          <% if order_item.errors.any? %>
+            <div id="error_explanation">
+
+              <ul>
+              <% order_item.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
         <h5 class="text-right">Remaining amount: <span style="color: red">
           <%= sale_item.amount %></span></h5>      
       

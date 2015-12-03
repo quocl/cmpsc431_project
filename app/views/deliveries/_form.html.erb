@@ -11,6 +11,11 @@
     </div>
   <% end %>
 
+
+    <% @wishlist_items.each do |wishlist_item| %>
+      <%= render 'wishlists/list_row', sale_item: wishlist_item.sale_item, wishlist_item: wishlist_item%>
+    <%end%>
+
   <div class="field">
     <%= f.label :address_id %><br>
     <%= f.text_field :address_id %>

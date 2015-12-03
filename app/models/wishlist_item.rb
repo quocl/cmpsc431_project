@@ -3,6 +3,7 @@ class WishlistItem < ActiveRecord::Base
   belongs_to :wishlist
   validate :sale_item_present
   validate :wishlist_present
+  validates_uniqueness_of :sale_item_id, scope: [:wishlist_id]
 
 
 private

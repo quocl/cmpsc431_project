@@ -1,5 +1,5 @@
 <% if @order.errors.any? || @order_item.errors.any? %>
-	alert("not valid.")
+	alert("The seller does not have enough items. Please adjust your amount")
 <% else %>
   $(".cart-text").html("<%= escape_javascript(render 'layouts/cart_text') %>")
 <% end %>
