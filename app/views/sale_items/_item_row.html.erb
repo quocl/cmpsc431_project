@@ -9,6 +9,8 @@
 
     <div class="col-xs-8">
       <h5><%= "Seller: #{users.find(sale_item.user_id).email}" rescue nil%></small></h5>
+      <h5><%= "Location: #{sale_item.item_location}" rescue nil%></small></h5>
+      <h5><%= "Location: #{sale_item.item_description}" rescue nil%></small></h5>
     </div>
 
     <div class="col-xs-4">
