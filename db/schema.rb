@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(version: 20151202185538) do
   create_table "wishlists", force: :cascade do |t|
     t.string   "user_id"
     t.string   "name"
+    t.string   "shared"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.decimal  "subtotal",   precision: 10, scale: 2
