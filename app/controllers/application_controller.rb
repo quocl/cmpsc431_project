@@ -31,6 +31,9 @@ class ApplicationController < ActionController::Base
     Category.all
   end
 
+  def current_sale_items
+    SaleItem.all
+  end
 
   def after_sign_in_path_for(resource)
     session[:previous_url] || root_path

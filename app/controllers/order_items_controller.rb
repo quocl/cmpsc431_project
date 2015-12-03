@@ -1,15 +1,25 @@
 class OrderItemsController < ApplicationController
   def create
     @order = current_order
-    if !@order.order_items.find_by sale_item_id: order_item_params[:sale_item_id]
-      @order_item = @order.order_items.new(order_item_params)
-      @order.save
-      session[:order_id] = @order.id
+    if order_item_params[:quantity].to_i > current_sale_items.find(order_item_params[:sale_item_id]).amount
+      flash[:notice] = 'Successfully checked in'
+      redirect_to sale_items_path
     else
-      @order_item = @order.order_items.find_by sale_item_id: order_item_params[:sale_item_id]
-      @order_item.quantity = @order_item.quantity + order_item_params[:quantity].to_i
-      @order_item.save
-      @order.save
+      if !@order.order_items.find_by sale_item_id: order_item_params[:sale_item_id]
+        @order_item = @order.order_items.new(order_item_params)
+        @order.save
+        session[:order_id] = @order.id
+        @order_item = @order.order_items.find_by sale_item_id: order_item_params[:sale_item_id]
+      else
+        if order_item_params[:quantity].to_i + @order_item.quantity > current_sale_items.find(order_item_params[:sale_item_id]).amount
+          flash[:notice] = 'Successfully checked in'
+          redirect_to sale_items_path
+        else
+          @order_item.quantity = @order_item.quantity + order_item_params[:quantity].to_i
+          @order_item.save
+          @order.save
+        end
+      end
     end
   end
 
