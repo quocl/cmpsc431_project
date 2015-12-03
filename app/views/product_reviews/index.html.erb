@@ -1,0 +1,37 @@
+<h3>Product Reviews:</h3>
+
+<%= debug params[:sale_item_id] %>
+<p>
+  <b>Title:</b>
+  <%= @idToGet %>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @product_reviews.each do |productReview| %>
+
+      <tr height = "40" style="vertical-align:bottom">
+        <td><i>Rating: <%= productReview.rating %> / 5</i></td>
+      </tr>
+
+      <tr>
+        <td><b><%= productReview.review_title %></b></td>
+      </tr>
+
+      <tr>
+        <td><%= productReview.review_content %></td>
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "New Review", { :controller => :product_reviews, :action => :new, :id => @idToGet, :method => :post }%>

@@ -3,12 +3,18 @@ Rails.application.routes.draw do
   get 'order_items/update'
   get 'order_items/destroy'
   get 'carts/show'
+  get 'product_reviews/index'
 
   resources :addresses
   devise_for :users
   resources :categories 
-  resources :sale_items
+  resources :sale_items do
+    resources :product_reviews
+  end
+
+  resources :seller_reviews
   resources :wishlists
+  
   resource :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
   root to: "sale_items#index"

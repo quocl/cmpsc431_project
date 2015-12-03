@@ -1,0 +1,27 @@
+<%= form_for(@seller_review) do |sr| %>
+  
+  <div class="field">
+    <%= sr.label :seller_id %><br>
+    <%= sr.text_field :seller_id %>
+  </div>
+
+  <div class="field">
+    <%= sr.label :rating %><br>
+    <%= sr.text_field :rating %>
+  </div>
+
+  <div class="field">
+    <%= sr.label :review_title %><br>
+    <%= sr.text_field :review_title %>
+  </div>
+
+  <div class="field">
+    <%= sr.label :review_content %><br>
+    <%= sr.text_area :review_content %>
+  </div>
+
+  <div class="actions">
+    <%= sr.submit %>
+  </div>
+
+<% end %>
