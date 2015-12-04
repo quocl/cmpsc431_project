@@ -4,9 +4,7 @@
 
   <div class="row">
 
-    <div class="col-xs-8">
-      <h4><%= sale_item.item_name %></small></h4>
-    </div>
+    <div class="col-xs-8"><h4><%= sale_item.item_name %></small></h4></div>
 
     <div class="col-xs-8">
       <h5><%= "Seller: #{users.find(sale_item.user_id).email}" rescue nil%></small></h5>
@@ -47,14 +45,11 @@
 
             <% else %>
               
-              <%= form_for wishlist_item, remote: true, html:{:id=>'wishlist_item_form'} do |d| %>
-                  <select name="wishlist_item[wishlist_id]" id="wishlist_item_wishlist_id" onchange="$('#wishlist_item_form').submit();">
-                    <option value="" selected disabled>Select to save item to a wishlist</option>
-                    <% current_user.wishlists.each do |wishlist| %>
-                      <option value=<%= wishlist.id%>><%= wishlist.name%></option>
-                    <% end %>
-                  </select>
-                  <div class="col-xs-3"><%= d.hidden_field :sale_item_id, value: sale_item.id %></div>
+              <%= form_for wishlist_item, remote: true, html:{:id=>"wishlist_item_form_#{sale_item.id}"} do |d| %>
+                <%= d.hidden_field :sale_item_id, value: sale_item.id %>
+                <%= d.select :wishlist_id, options_from_collection_for_select(current_user.wishlists, 'id', 'name'), {:include_blank => "Placeholder" } ,onchange: "$('#wishlist_item_form_#{sale_item.id}').submit();"%>
+
+                  
 
               <% end %>
             <% end %>
