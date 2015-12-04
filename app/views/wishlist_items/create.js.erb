@@ -1,7 +1,5 @@
 <% if @wishlist.errors.any? || @wishlist_item.errors.any? %>
 	alert("The item is in wishlist.")
 <% else %>
-	alert("The item is in the wishlist.")
+	alert("The item is added into the wishlist.")
 <% end %>
-
-$(".cart-text").html("<%= escape_javascript(render 'layouts/cart_text') %>")

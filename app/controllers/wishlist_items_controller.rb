@@ -3,7 +3,7 @@ class WishlistItemsController < ApplicationController
     @wishlist = current_user.wishlists.find(wishlist_item_params[:wishlist_id])
     if !@wishlist.wishlist_items.find_by sale_item_id: wishlist_item_params[:sale_item_id]
       @wishlist_item = @wishlist.wishlist_items.new(wishlist_item_params)
-      @wishlist_item.save
+      @wishlist.save
     else
       @wishlist_item = @wishlist.wishlist_items.find_by sale_item_id: wishlist_item_params[:sale_item_id]
       @wishlist_item.save

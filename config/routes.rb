@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :sale_items
   resources :seller_reviews
   resources :wishlists
-  resources :wishlist_items
+  resources :wishlist_items, only: [:create, :update, :destroy]
   resource :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
   root to: "sale_items#index"
