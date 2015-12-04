@@ -8,6 +8,7 @@ class WishlistsController < ApplicationController
       @wishlists1 = current_user.wishlists
     end
     @wishlists2 = Wishlist.where("shared =?", 'public')
+    @users = current_users
   end
 
   # GET /wishlists/1

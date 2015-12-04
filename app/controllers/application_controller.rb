@@ -37,6 +37,10 @@ class ApplicationController < ActionController::Base
     SaleItem.all
   end
 
+  def current_users
+    User.all
+  end
+
   def after_sign_in_path_for(resource)
     session[:previous_url] || root_path
   end

@@ -10,25 +10,45 @@
       </ul>
     </div>
   <% end %>
+    
+   
+        <% if @order.order_items.size == 0 %>
+            <p class="text-center">
+              There are no items in your shopping cart.  Please <%= link_to "go back", root_path %> and add some items to your cart.
+            </p> %>
+        <% else %>
+            <table class = "table table-striped">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Item amount</th>
+                <th>Subtotal</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @order.order_items.each do |order_item| %>
+            <tr>
+              <td><%= @sale_items.find(order_item.sale_item_id).item_name %></td>
+              <td><%= order_item.quantity %></td>
+              <td><%= number_to_currency order_item.total_price %></td>
+            </tr>
+          <% end %>
+             </tbody>
+              </table>
+          <h3 class="text-right">Total Price: <span style="color: green"><%= number_to_currency current_order.subtotal %></span></h3>
+        <% end %>
 
 
-    <% @wishlist_items.each do |wishlist_item| %>
-      <%= render 'wishlists/list_row', sale_item: wishlist_item.sale_item, wishlist_item: wishlist_item%>
-    <%end%>
+
+
+  <%= render "address_row" , f: f %>
+  <%= render "card_row" , f: f %>
 
   <div class="field">
-    <%= f.label :address_id %><br>
-    <%= f.text_field :address_id %>
-  </div>
-  <div class="field">
-    <%= f.label :card_id %><br>
-    <%= f.text_field :card_id %>
-  </div>
-  <div class="field">
-    <%= f.label :trackingnumber %><br>
-    <%= f.text_field :trackingnumber %>
+    <%= f.hidden_field :trackingnumber %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-primary"%>
   </div>
 <% end %>
