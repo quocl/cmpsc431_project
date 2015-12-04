@@ -51,7 +51,7 @@
 
       <% else %>
         
-          <%=select :wishlist_id, options_from_collection_for_select(current_user.addresses, 'id', 'name'), {:include_blank => "Select a presaved addresses"} ,onchange: "#" %>
+          <%= f.select :address_id, options_from_collection_for_select(current_user.addresses, 'id', 'name'), {:include_blank => "Select a presaved addresses"} ,onchange: "#" %>
 
             
 
@@ -68,7 +68,7 @@
 
       <% else %>
         
-          <%=select :wishlist_id, options_from_collection_for_select(current_user.cards, 'id', 'name'), {:include_blank => "Select a presaved addresses"} ,onchange: "#" %>
+          <%= f.select :card_id, options_from_collection_for_select(current_user.cards, 'id', 'name'), {:include_blank => "Select a presaved card"} ,onchange: "#" %>
 
             
 
