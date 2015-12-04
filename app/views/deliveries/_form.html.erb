@@ -41,14 +41,46 @@
 
 
 
+  <div class="row">
+  <%= render "address_row" , f: f , address_selected: @address_selected%>
+  <div class="col-xs-0  ">
 
-  <%= render "address_row" , f: f %>
-  <%= render "card_row" , f: f %>
+      <% if current_user.addresses.size == 0 %>
 
+        <select><option>You don't have a stored address yet.</option></select>
+
+      <% else %>
+        
+          <%=select :wishlist_id, options_from_collection_for_select(current_user.addresses, 'id', 'name'), {:include_blank => "Select a presaved addresses"} ,onchange: "#" %>
+
+            
+
+      <% end %>
+
+  </div>
+  </div>
+  <%= render "card_row" , f: f,  card_selected: @card_selected %>
+  <div class="col-xs-0  ">
+
+      <% if current_user.addresses.size == 0 %>
+
+        <select><option>You don't have a stored card yet.</option></select>
+
+      <% else %>
+        
+          <%=select :wishlist_id, options_from_collection_for_select(current_user.cards, 'id', 'name'), {:include_blank => "Select a presaved addresses"} ,onchange: "#" %>
+
+            
+
+      <% end %>
+
+  </div>
+  </div>
+  </div>
   <div class="field">
     <%= f.hidden_field :trackingnumber %>
   </div>
-  <div class="actions">
+  <div class="actions text-right">
     <%= f.submit :class => "btn btn-primary"%>
   </div>
 <% end %>

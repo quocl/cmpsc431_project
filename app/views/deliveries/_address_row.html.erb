@@ -1,4 +1,13 @@
-  <div class="field">
-    <%= f.label :address_id %><br>
-    <%= f.text_field :address_id %>
-  </div>
+  <div class="field col-xs-6">
+  	<div class"field col-xs-3"=>
+    <%= f.label :address_id %>
+    </div>
+    <div class"field col-xs-3"=>
+    <% if address_selected.nil? %>
+    	<%= "You don't have a address selected." %>
+    <% else %>
+    	<%= "#{current_user.addresses}" %>
+    <% end %>
+  	</div>
+
+  

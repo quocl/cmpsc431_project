@@ -17,6 +17,8 @@ class DeliveriesController < ApplicationController
     @order = current_order
     @delivery = Delivery.new
     @sale_items = current_sale_items
+    @address_selected = nil
+    @card_selected = nil
   end
 
   # GET /deliveries/1/edit

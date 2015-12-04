@@ -1,19 +1,5 @@
 Rails.application.routes.draw do
-  
-  get 'deliveries/new'
 
-  get 'deliveries/create'
-
-  get 'deliveries/edit'
-  get 'deliveries/index'
-
-  get 'deliveries/update'
-
-  get 'deliveries/delete'
-
-  get 'deliveries/destory'
-
-  get 'carts/show'
 
   resources :addresses
   devise_for :users
@@ -33,6 +19,7 @@ Rails.application.routes.draw do
 
   resources :cards
   resources :sale_items
+  resources :deliveries
   resources :seller_reviews
   resources :wishlists
   resources :wishlist_items, only: [:create, :update, :destroy]
