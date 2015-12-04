@@ -24,7 +24,6 @@ class WishlistItemsController < ApplicationController
     @wishlist_item = @wishlist.wishlist_items.find(params[:id])
     @wishlist_item.destroy
     @wishlist_items = @wishlist.wishlist_items
-    @wishlist.save
   end
 
 private

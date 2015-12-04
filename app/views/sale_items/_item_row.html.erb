@@ -3,33 +3,22 @@
 
 
   <div class="row">
+
     <div class="col-xs-8">
       <h4><%= sale_item.item_name %></small></h4>
     </div>
+
     <div class="col-xs-8">
       <h5><%= "Seller: #{users.find(sale_item.user_id).email}" rescue nil%></small></h5>
       <h5><%= "Location: #{sale_item.item_location}" rescue nil%></small></h5>
       <h5><%= "Location: #{sale_item.item_description}" rescue nil%></small></h5>
+      <h5><%= link_to "Product reviews", sale_item_product_reviews_path(sale_item.id)%></h5>
     </div>
 
     <div class="col-xs-4">
       <%= form_for order_item, remote: true do |f| %>
-          <% if order_item.errors.any? %>
-            <div id="error_explanation">
-
-              <ul>
-              <% order_item.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-              </ul>
-            </div>
-          <% end %>
         <h5 class="text-right">Remaining amount: <span style="color: red">
-          <%= sale_item.amount %></span></h5>      
-      
-      <%= link_to "Product reviews", sale_item_product_reviews_path(sale_item.id)%>      
-
-
+          <%= sale_item.amount %></span></h5>
         <h4 class="text-right">Unit Price: <span style="color: green">
           <%= number_to_currency sale_item.item_price %></span></h4>
         <div class="input-group col-xs-1">
@@ -45,41 +34,46 @@
     </div>
 
   </div> 
-    <div class="row"><div class="col-xs-1">&nbsp;</div></div>
-    <div class="row">
-      <div class="col-xs-1">&nbsp;</div>
 
-      <div class="col-xs-7">
+    <div class="row">
+        
+
+      <div class="col-xs-1">
           <% if !current_user.nil? %>
 
             <% if current_user.wishlists.size == 0 %>
-              <select><option>You don't have a wishlst yet.</option></select></div></div>
+
+              <select><option>You don't have a wishlst yet.</option></select>
+
             <% else %>
               
-              <%= form_for wishlist_item, remote: true do |f| %>
+              <%= form_for wishlist_item, remote: true do |d| %>
                   <select name="wishlist_item[wishlist_id]" id="wishlist_item_wishlist_id">
                     <% current_user.wishlists.each do |wishlist| %>
                       <option value=<%= wishlist.id%>><%= wishlist.name%></option>
                     <% end %>
                   </select>
-                  </div>
                   
                   <div class="col-xs-3">
-                    <%= f.hidden_field :sale_item_id, value: sale_item.id %>
-                    <div class=="col-xs-1 text-right"><%= f.submit "Add to wishlist", class: "btn btn-primary" %></div>
-                  </div>
+                    <%= d.hidden_field :sale_item_id, value: sale_item.id %></div>
+                    <div class=="col-xs-1 text-right">
+                      <%= d.submit "Add to wishlist", class: "btn btn-primary" %>
+                    </div>
 
               <% end %>
-              </div>
             <% end %>
+
 
           <% else %>
 
-            <select><option>Register or login to save your item into a wishlist!</option></select></div></div>
+            <select><option>Register or login to save your item into a wishlist!</option></select>
 
           <% end %>
-        
 
+        </div>
+        </div>
 
 
 </div>
+
+

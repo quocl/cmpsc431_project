@@ -1,12 +1,6 @@
 class OrderItemsController < ApplicationController
   def create
     @order = current_order
-    # if order_item_params[:quantity].to_i > current_sale_items.find(order_item_params[:sale_item_id]).amount
-    #   respond_to do |format|
-    #     format.html { redirect_to sale_items_path, notice: 'Category was successfully updated.' }
-    #     format.json { render :index, location: sale_items_path }
-    #   end
-    # else
       if !@order.order_items.find_by sale_item_id: order_item_params[:sale_item_id]
         @order_item = @order.order_items.new(order_item_params)
         @order.save
@@ -21,7 +15,6 @@ class OrderItemsController < ApplicationController
           @order.save
         end
       end
-    # end
   end
 
   def update

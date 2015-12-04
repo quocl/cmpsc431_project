@@ -3,3 +3,5 @@
 <% else %>
 	alert("The item is in the wishlist.")
 <% end %>
+
+$(".cart-text").html("<%= escape_javascript(render 'layouts/cart_text') %>")
