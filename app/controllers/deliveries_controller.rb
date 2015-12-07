@@ -10,6 +10,9 @@ class DeliveriesController < ApplicationController
   # GET /deliveries/1
   # GET /deliveries/1.json
   def show
+    @delivery = Delivery.find(params[:id])
+    @order = Order.find(@delivery.order_id)
+    @sale_items = current_sale_items
   end
 
   # GET /deliveries/new
@@ -23,6 +26,9 @@ class DeliveriesController < ApplicationController
 
   # GET /deliveries/1/edit
   def edit
+    @delivery = Delivery.find(params[:id])
+    @order = Order.find(@delivery.order_id)
+    @sale_items = current_sale_items
   end
 
   # POST /deliveries

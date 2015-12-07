@@ -179,8 +179,8 @@
             <td><%= sale_item.amount %></td>
             <td><%= sale_item.item_price %></td>
             <td><%= sale_item.category.name %>
-            <td><%= link_to 'Edit', edit_sale_item_path(sale_item) %>&nbsp
-            <%= link_to 'Unlist', sale_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Edit', edit_sale_item_path(sale_item), class: "btn btn-primary"%>
+            <%= link_to 'Unlist', sale_item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
           </tr>
         <% end %>
       <%else%>  
@@ -190,8 +190,8 @@
             <td><%= sale_item.amount %></td>
             <td><%= sale_item.item_price %></td>
             <td><%= sale_item.category.name %>
-            <td><%= link_to 'Edit', edit_sale_item_path(sale_item) %>&nbsp
-            <%= link_to 'Unlist', sale_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Edit', edit_sale_item_path(sale_item), class: "btn btn-primary"%>
+            <%= link_to 'Unlist', sale_item,class: "btn btn-danger" , method: :delete, data: { confirm: 'Are you sure?' }%></td>
           </tr>
         <% end %>
       <% end %>  

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-
+  get "deliveries/update_address", :as => "update_address"
+  get "deliveries/update_card", :as => "update_card"
   resources :addresses
   devise_for :users
 

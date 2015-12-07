@@ -1,29 +1,31 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Order:</strong>
-  <%= @delivery.order %>
+  <h1>Order Items</h1>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @delivery.user %>
-</p>
+<% @delivery.order.order_items.each do |orderitem|%>
+  <table class = "table table-striped">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Item amount</th>
+                <th>Subtotal</th>
+                <th>Location</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @order.order_items.each do |order_item| %>
+            <tr>
+              <td><%= @sale_items.find(order_item.sale_item_id).item_name %></td>
+              <td><%= order_item.quantity %></td>
+              <td><%= number_to_currency order_item.total_price %></td>
+              <td><%= SaleItem.find(orderitem.sale_item_id).item_location %></td>
+            </tr>
+          <% end %>
+             </tbody>
+              </table>
 
-<p>
-  <strong>Address:</strong>
-  <%= @delivery.address %>
-</p>
-
-<p>
-  <strong>Card:</strong>
-  <%= @delivery.card %>
-</p>
-
-<p>
-  <strong>Trackingnumber:</strong>
-  <%= @delivery.trackingnumber %>
-</p>
-
-<%= link_to 'Edit', edit_delivery_path(@delivery) %> |
-<%= link_to 'Back', deliveries_path %>
+<%end%>
+<%= link_to 'Back', profile_url, :class => "btn btn-primary"%>
