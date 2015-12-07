@@ -1,4 +1,4 @@
-<%= form_for(@delivery) do |f| %>
+<%= form_for @delivery do |f| %>
   <% if @delivery.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@delivery.errors.count, "error") %> prohibited this delivery from being saved:</h2>
@@ -40,9 +40,12 @@
         <% end %>
 
 
-
   <div class="row">
-  <%= render "address_row" , f: f , address_selected: @address_selected%>
+  <div class="field col-xs-6">
+  <div class"field col-xs-3"=>
+  <%= f.label :address_id %>
+  </div>       
+  <%= render "address_row"%>
   <div class="col-xs-0  ">
 
       <% if current_user.addresses.size == 0 %>
@@ -50,16 +53,34 @@
         <select><option>You don't have a stored address yet.</option></select>
 
       <% else %>
-        
-          <%= f.select :address_id, options_from_collection_for_select(current_user.addresses, 'id', 'name'), {:include_blank => "Select a presaved addresses"} ,onchange: "#" %>
+           
+          <%= f.select :address_id, options_from_collection_for_select(current_user.addresses, 'id', 'name'), {:include_blank => "Select a presaved addresses"}%>
 
+          <script>
+            $(document).ready(function() {
+              $('#delivery_address_id').change(function() {
+                $.ajax({
+                  url: "<%= update_address_path %>",
+                  data: {
+                    add_id : $('#delivery_address_id').val()
+                  },
+                  dataType: "script"
+                });
+              });
+            });
+          </script>
             
 
       <% end %>
 
   </div>
   </div>
-  <%= render "card_row" , f: f,  card_selected: @card_selected %>
+
+  <div class="field col-xs-6">
+  <div class"field col-xs-3"=>
+  <%= f.label :card_id %>
+  </div>
+  <%= render "card_row" %>
   <div class="col-xs-0  ">
 
       <% if current_user.addresses.size == 0 %>
@@ -68,7 +89,22 @@
 
       <% else %>
         
-          <%= f.select :card_id, options_from_collection_for_select(current_user.cards, 'id', 'name'), {:include_blank => "Select a presaved card"} ,onchange: "#" %>
+          <%= f.select :card_id, options_from_collection_for_select(current_user.cards, 'id', 'name'), {:include_blank => "Select a presaved card"}%>
+
+          <script>
+            $(document).ready(function() {
+              $('#delivery_card_id').change(function() {
+                $.ajax({
+                  url: "<%= update_card_path %>",
+                  data: {
+                    c_id : $('#delivery_card_id').val()
+                  },
+                  dataType: "script"
+                });
+              });
+            });
+          </script>
+
 
             
 
@@ -76,9 +112,6 @@
 
   </div>
   </div>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :trackingnumber %>
   </div>
   <div class="actions text-right">
     <%= f.submit :class => "btn btn-primary"%>

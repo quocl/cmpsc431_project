@@ -1,11 +1,15 @@
-  <div class="field col-xs-6">
-  	<div class"field col-xs-3"=>
-    <%= f.label :card_id %>
-    </div>
-    <div class"field col-xs-3"=>
-    <% if card_selected.nil? %>
+  
+    <div class"field col-xs-3" id = "card_text">
+    <% if @card_selected.nil? %>
     	<%= "You don't have a card selected." %>
     <% else %>
-    	<%= "#{current_user.cards}" %>
+    	<%= "#{@card_selected.card_number}" %>
+      <br>
+      <%= "#{@card_selected.expiration}" %>
+      <br>
+      <%= "#{@card_selected.security_code}" %>
+      <br>
+      <%= "#{@card_selected.card_type}" %>
+      <br>
     <% end %>
   	</div>

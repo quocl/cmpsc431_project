@@ -76,16 +76,6 @@
   Deliveries
   </h4>
   <table class = "table table-striped">
-    <thead>
-    <tr>
-      <th>Order</th>
-      <th>User</th>
-      <th>Address</th>
-      <th>Card</th>
-      <th>Trackingnumber</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
 <% if @user.deliveries.size == 0 %>
   <tbody>
@@ -97,7 +87,7 @@
 <% else %>
   <thead>
     <tr>
-      <th>Order</th>
+      <th>Order Date</th>
       <th>User</th>
       <th>Address</th>
       <th>Card</th>
@@ -109,14 +99,18 @@
   <tbody>
     <% @user.deliveries.each do |delivery| %>
       <tr>
-        <td><%= delivery.order %></td>
-        <td><%= delivery.user %></td>
-        <td><%= delivery.address %></td>
-        <td><%= delivery.card %></td>
-        <td><%= delivery.trackingnumber %></td>
-        <td><%= link_to 'Show Item Details', delivery %></td>
-        <td><%= link_to 'Change Details', edit_delivery_path(delivery) %></td>
-        <td><%= link_to 'Cancel', delivery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= delivery.created_at %></td>
+        <td><%= delivery.user.username %></td>
+        <td><%= Address.find(delivery.address_id).street %></td>
+        <td><%= Card.find(delivery.card_id).card_number %></td>
+        <% if delivery.trackingnumber.nil? %>
+          <td><%= "Not shipped yet."%></td>
+        <% else %>
+          <td><%= delivery.trackingnumber%></td>
+        <% end %>
+        <td><%= link_to 'Show Item Details', delivery ,:class=>"btn btn-primary btn-xs"%></td>
+        <td><%= link_to 'Change Details', edit_delivery_path(delivery), :class=>"btn btn-primary btn-xs" %></td>
+        <td><%= link_to 'Cancel', delivery, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-danger btn-xs"%></td>
       </tr>
     <% end %>
   </tbody>
