@@ -7,27 +7,27 @@
 
 <p>
   <strong>Parent Category:</strong>
-  <%= link_to "#{@category.category.name}", category_path(:id => @category.category_id) rescue nil %>
+  <%= link_to "#{@category.parentcategory.name}", category_path(:id => @category.parentcategory.id), :class => "btn btn-primary"%>
 </p>
 
 <table class ="table table-striped">
   <thead>
     <tr>
-      <th>Child Categories</th>
+      <th>Subcategories</th>
     </tr>
   </thead>
 
   <tbody>
   	<% @child_categories.each do |category| %>
   		<tr>
-  			<td> <%= link_to "#{category.name}", category_path(:id => category.id) %> </td>	
+  			<td> <%= link_to "#{category.name}", category_path(:id => category.id),:class => "btn btn-primary" %> </td>	
   		</tr>	
   	<% end %> 
   </tbody>
 
 </table>
 <hr>
-<strong>Listing Sale Items</strong>
+<strong>Containing Sale Items</strong>
 
 <table class ="table table-stripped">
   <thead>
@@ -47,13 +47,12 @@
         <td><%= sale_item.item_description %></td>
         <td><%= sale_item.item_price %></td>
         <td><%= sale_item.item_location %></td>
-        <td><%= link_to 'Show', sale_item %></td>
-        <td><%= link_to 'Edit', edit_sale_item_path(sale_item) %></td>
-        <td><%= link_to 'Destroy', sale_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', sale_item ,:class => "btn btn-primary"%></td>
+        <td><%= link_to 'Edit', edit_sale_item_path(sale_item) ,:class => "btn btn-primary"%></td>
+        <td><%= link_to 'Destroy', sale_item, method: :delete, data: { confirm: 'Are you sure?' } ,:class => "btn btn-danger"%></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= link_to "Sale Items", sale_items_category_path(:id => @category.id) %>
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<%= link_to 'Edit', edit_category_path(@category) ,:class => "btn btn-primary"%> |
+<%= link_to 'Back', categories_path ,:class => "btn btn-danger"%>

@@ -9,6 +9,13 @@
       <%= render "item_row", sale_item: sale_item, order_item: @order_item, wishlist_item: @wishlist_item, users: @users%>
     <% end %>
   </div>
+  <div >
+	<%= select_tag :category_id, options_from_collection_for_select(@categories, 'id', 'name'), {:prompt => "Select a category", onchange: "redirectToSaleItem(this.value)"}%>
+	</div>
+<%= javascript_tag do %>
+  function redirectToSaleItem(current_category){
+     window.location = "<%= url_for(:controller => 'sale_items', :action => 'index') %>?current_category="+current_category;
+  }
+<% end %>
 </div>
 <%end%>
-<br>

@@ -10,6 +10,11 @@ class SaleItemsController < ApplicationController
     @order_item = current_order.order_items.new
     @wishlist_item = WishlistItem.new
     @users = User.all
+    @categories = current_categories
+    if params[:current_category]
+      @sale_items = SaleItem.where(category_id: params[:current_category])
+    end
+
   end
 
   # GET /sale_items/1

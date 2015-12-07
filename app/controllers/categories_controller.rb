@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     @category = Category.find(params[:id])
-    @child_categories = @category.childcategories
+    @child_categories = @category.subcategories
   end
 
   def sale_items
@@ -26,6 +26,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
+    @categories = Category.all # parent categories to choose from
   end
 
   # POST /categories
