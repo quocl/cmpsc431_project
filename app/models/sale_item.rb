@@ -9,5 +9,10 @@ class SaleItem < ActiveRecord::Base
     validates_uniqueness_of :item_name, scope: [:user]
     has_many :order_items
     has_many :wishlist_items
+    has_many :product_reviews
     belongs_to :category
+    searchable do
+        text :item_name, :default_boost => 5
+        text :item_location
+    end
 end

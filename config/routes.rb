@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   end
 
   resources :cards
-  resources :sale_items
   resources :deliveries
   resources :seller_reviews
   resources :wishlists
