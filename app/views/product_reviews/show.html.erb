@@ -1,7 +1,4 @@
 <p id="notice"><%= notice %></p>
-<%= debug @idToGet %>
 
-
-<%= debug @product_review %>
-
-<%= link_to "Back", { :controller => :product_reviews, :action => :index, :id => @idToGet, :method => :post }%>
+<h3>Your review was created.</h3>
+<%= link_to "Back to sale items", sale_items_path%>  

@@ -10,6 +10,14 @@ class SaleItemsController < ApplicationController
     @order_item = current_order.order_items.new
     @wishlist_item = WishlistItem.new
     @users = User.all
+    @items_to_search_for = SaleItem.search(params[:search])
+
+    if params[:search]
+      @sale_items = SaleItem.search(params[:search])
+    else
+      @sale_items = SaleItem.order("created_at DESC")
+    end
+
   end
 
   # GET /sale_items/1

@@ -9,4 +9,11 @@ class SaleItem < ActiveRecord::Base
     has_many :order_items
     has_many :wishlist_items
     belongs_to :category
+
+def self.search(search)
+  if search
+    where("item_name like ?","%#{search}%")
+  end
+end
+
 end

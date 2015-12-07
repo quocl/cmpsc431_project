@@ -1,9 +1,3 @@
-<%= debug @idToGet %>
-<p>
-  <b>Title:</b>
-  <%= @idToGet %>
-</p>
-
 <%= form_for(@product_review) do |pr| %>
 
   <div class="field">
@@ -21,7 +15,7 @@
     <%= pr.text_area :review_content %>
   </div>
 
-  <%= pr.hidden_field :item_id, :value => @idToGet %>
+  <%= pr.hidden_field :item_id, :value => params[:sale_item_id] %>
 
   <div class="actions">
     <%= pr.submit %>

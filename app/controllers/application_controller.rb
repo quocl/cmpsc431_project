@@ -21,8 +21,8 @@ class ApplicationController < ActionController::Base
 
   def current_order
       if !session[:order_id].nil?
-        Order.find(session[:order_id]) rescue nil
-        return Order.new
+        tmp = Order.find(session[:order_id]) rescue nil
+        return tmp != nil ? tmp : Order.new
       else
         return Order.new
       end

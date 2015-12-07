@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'deliveries/destory'
 
   get 'carts/show'
+  get 'order_items/display_order_report'
 
   resources :addresses
   devise_for :users
@@ -29,7 +30,10 @@ Rails.application.routes.draw do
   end 
   resources :sale_items do
     resources :product_reviews
+    resources :seller_reviews
   end
+
+  resources :product_reviews
 
   resources :cards
   resources :sale_items
