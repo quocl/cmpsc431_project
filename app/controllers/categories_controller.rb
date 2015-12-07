@@ -33,7 +33,7 @@ class CategoriesController < ApplicationController
   # POST /categories.json
   def create
     @category = Category.new(category_params)
-    #@category.category_id = params[:category_id]
+    @category.parentcategory = Category.find(category_params[:category_id])
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
