@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h1>A report of all orders:</h1>
+
+
+    <tr height = "40" style="vertical-align:bottom">
+      <td>Order ID</td>
+      <td>Item Purchased</td>
+      <td>Unit Price</td>
+      <td>Quantity Purchased</td>
+      <td>Total Price</td>
+    </tr>
+
+
+   	<% @all_order_records.each do |orderRec| %>
+   	  <% @currentSaleItem = SaleItem.where(id: orderRec.sale_item_id) %>
+      <tr height = "40" style="vertical-align:bottom">
+        <td><i><%= orderRec.unit_price %></i></td>
+      </tr>
+
+    <% end %>
