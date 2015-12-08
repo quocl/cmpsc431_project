@@ -16,6 +16,8 @@ class WishlistsController < ApplicationController
   def show
     @current_wishlist = Wishlist.find(params[:id])
     @wishlist_items = @current_wishlist.wishlist_items
+    @order_item = current_order.order_items.new
+    @users = User.all
     
   end
 

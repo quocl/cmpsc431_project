@@ -19,7 +19,18 @@
                     &nbsp;
                     <div class="col-xs-12 text-right">
             <div class="btn-group text-right"><%= link_to "Details", "#",class: "btn btn-primary"%></div>
-            <div class="btn-group"><%= link_to "Pay", "#", class: "btn btn-primary"%></div>
+
+            <div class="col-xs-4">
+              <%= form_for @order_item, remote: true do |f| %>
+                  <%= f.hidden_field :quantity, value: 1, class: "form-control", min: 1, size: 5 %>
+                  <%= f.hidden_field :sale_item_id, value: sale_item.id %>
+                  <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+                </div>
+                </div>
+              
+              <% end %>
+            </div>
+
             <% if Wishlist.find(params[:id]).user_id.to_i == current_user.id.to_i%>
               <div class="btn-group">
               <%= link_to "Delete", wishlist_item_path(wishlist_id: wishlist_item.wishlist_id, id: wishlist_item.id), { data: { confirm: "Are you sure you wish to delete the item '#{wishlist_item.sale_item.item_name}' from your wishlist?"}, method: :delete, remote: true, class: "btn btn-danger" } %>
