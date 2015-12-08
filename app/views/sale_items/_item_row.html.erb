@@ -47,6 +47,8 @@
               
               <%= form_for wishlist_item, remote: true, html:{:id=>"wishlist_item_form_#{sale_item.id}"} do |d| %>
                 <%= d.hidden_field :sale_item_id, value: sale_item.id %>
+                <%= d.hidden_field :quantity, value: 1 %>
+                <%= d.hidden_field :unit_price, value: sale_item.item_price %>
                 <%= d.select :wishlist_id, options_from_collection_for_select(current_user.wishlists, 'id', 'name'), {:include_blank => "Please select a wishlist to save", :disabled => 1} ,onchange: "$('#wishlist_item_form_#{sale_item.id}').submit();" %>
 
                   
