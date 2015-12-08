@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'order_items/display_order_report'
   
   get 'deliveries/new'
 

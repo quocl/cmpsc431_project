@@ -11,14 +11,16 @@
       <h5><%= "Location: #{sale_item.item_location}" rescue nil%></small></h5>
       <h5><%= "Location: #{sale_item.item_description}" rescue nil%></small></h5>
       <h5><%= link_to "Product reviews", sale_item_product_reviews_path(sale_item.id), :class => "btn btn-warning"%></h5>
+      <h5><%= link_to "Seller reviews", sale_item_seller_reviews_path(sale_item.id), :class => "btn btn-warning"%></h5>
     </div>
 
     <div class="col-xs-4">
       <%= form_for order_item, remote: true do |f| %>
         <h5 class="text-right">Remaining amount: <span style="color: red">
-          <%= sale_item.amount %></span></h5>
- <%= link_to "Reviews of this Seller", sale_item_seller_reviews_path(users.find(sale_item.user_id).id)%>        
-<h4 class="text-right">Unit Price: <span style="color: green">
+
+        <%= sale_item.amount %></span></h5>      
+      
+        <h4 class="text-right">Unit Price: <span style="color: green">
           <%= number_to_currency sale_item.item_price %></span></h4>
         <div class="input-group col-xs-1">
           <%= f.number_field :quantity, value: 1, class: "form-control", min: 1, size: 5 %>
@@ -55,13 +57,8 @@
                 <%= d.select :wishlist_id, options_from_collection_for_select(current_user.wishlists, 'id', 'name'), {:include_blank => "Please select a wishlist to save", :disabled => 1} ,onchange: "$('#wishlist_item_form_#{sale_item.id}').submit();" %>
 
                   
-                  <div class="col-xs-3">
-                    <%= f.hidden_field :sale_item_id, value: sale_item.id %>
-                    <div class=="col-xs-1 text-right"><%= f.submit "Add to wishlist", class: "btn btn-primary" %></div>
-                  </div>
 
               <% end %>
-              </div>
             <% end %>
 
 
@@ -70,7 +67,6 @@
             <select><option>Register or login to save your item into a wishlist!</option></select>
 
           <% end %>
-        
 
         </div>
         </div>
