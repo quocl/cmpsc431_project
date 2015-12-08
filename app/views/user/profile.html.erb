@@ -222,7 +222,7 @@
       <th>Shipping Address</th>
       <th>Item Name</th>
       <th>Quantity</th>
-      <th>shipped</th>
+      <th>Trackingnumber</th>
 
       <th colspan="3"></th>
     </tr>
@@ -243,8 +243,11 @@
         <% else %>
           <td><%= ordered_item.trackingnumber%></td>
         <% end %>
-        <td><%= link_to 'Show Item Details', ordered_item,:class=>"btn btn-primary btn-xs"%></td>
+        <% if ordered_item.trackingnumber.nil? %>
         <td><%= link_to 'Fulfill This Order', edit_ordered_item_path(ordered_item), :class=>"btn btn-danger btn-xs"%></td>
+        <% else %>
+        <td><%= link_to 'Already Fulfilled', "#", :class=>"btn btn-primary btn-xs"%></td>
+        <%end %>
       </tr>
     <% end %>
   </tbody>

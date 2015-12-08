@@ -16,6 +16,15 @@ class OrderedItemsController < ApplicationController
     @ordered_item = OrderedItem.find(params[:id])
     respond_to do |format|
       if @ordered_item.update(ordered_item_params)
+      	if Delivery.find(@ordered_item.delivery_id).shipped.nil?
+      		a = Delivery.find(@ordered_item.delivery_id)
+      		a.shipped = 1
+      		a.save
+      	else
+      		a = Delivery.find(@ordered_item.delivery_id)
+      		a.shipped += 1
+      		a.save
+      	end
         format.html { redirect_to profile_url, notice: 'Order was successfully fulfilled.' }
         format.json { render :show, status: :updated, location: profile_url }
       else
