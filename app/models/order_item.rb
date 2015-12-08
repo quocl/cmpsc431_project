@@ -1,9 +1,10 @@
 class OrderItem < ActiveRecord::Base
   belongs_to :sale_item
   belongs_to :order
-  validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0}
   validate :sale_item_present
   validate :order_present
+  validate :sale_item_enough
 
   before_save :finalize
 
@@ -35,5 +36,12 @@ private
   def finalize
     self[:unit_price] = unit_price
     self[:total_price] = quantity * self[:unit_price]
+  end
+
+  def sale_item_enough
+    amount = SaleItem.find(sale_item.id).amount
+    if quantity > amount
+     errors.add(:quantity, "cannot be supplied.")
+    end
   end
 end

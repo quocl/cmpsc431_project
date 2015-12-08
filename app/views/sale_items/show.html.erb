@@ -25,5 +25,5 @@
   <%= @categories.find(@sale_item.category_id).name %>
 </p>
 
-<%= link_to 'Edit', edit_sale_item_path(@sale_item) %> |
-<%= link_to 'Back', sale_items_path %>
+<%= link_to 'Edit', edit_sale_item_path(@sale_item), :class => "btn btn-primary"%> |
+<%= link_to 'Back', categories_path, :class => "btn btn-primary" %>

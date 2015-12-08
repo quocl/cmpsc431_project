@@ -1,11 +1,8 @@
 <p id="notice"><%= notice %></p>
-<% if @sale_items.size == 0 %>
+<% if @sale_items.size == 0%>
 <h1 align="center">Hey no one is selling!</h1>
 <%else%> 
 <h1>Sale Items</h1>
-
-<%= render 'search_criteria_form' %>
-
 
   <div class="row">
   <div class="col-xs-6">
@@ -14,6 +11,24 @@
       <%= render "item_row", sale_item: sale_item, order_item: @order_item, wishlist_item: @wishlist_item, users: @users%>
     <% end %>
   </div>
+  <div >
+	<%= select_tag :category_id, options_from_collection_for_select(@categories, 'id', 'name'), {:prompt => "Select a category", onchange: "redirectToSaleItem(this.value)"}%>
+	</div>
+  <br>
+  <div>
+  <%= form_tag sale_items_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+  <% end %>
+  </div>
+
+<%= javascript_tag do %>
+  function redirectToSaleItem(current_category){
+     window.location = "<%= url_for(:controller => 'sale_items', :action => 'index') %>?current_category="+current_category;
+  }
+<% end %>
 </div>
 <%end%>
 <br>

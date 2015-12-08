@@ -8,13 +8,15 @@ class WishlistsController < ApplicationController
       @wishlists1 = current_user.wishlists
     end
     @wishlists2 = Wishlist.where("shared =?", 'public')
+    @users = current_users
   end
 
   # GET /wishlists/1
   # GET /wishlists/1.json
   def show
-    @wishlist_items = Wishlist.find(params[:id]).wishlist_items
     @current_wishlist = Wishlist.find(params[:id])
+    @wishlist_items = @current_wishlist.wishlist_items
+    
   end
 
   # GET /wishlists/new

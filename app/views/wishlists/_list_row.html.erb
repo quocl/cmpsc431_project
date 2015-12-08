@@ -20,9 +20,11 @@
                     <div class="col-xs-12 text-right">
             <div class="btn-group text-right"><%= link_to "Details", "#",class: "btn btn-primary"%></div>
             <div class="btn-group"><%= link_to "Pay", "#", class: "btn btn-primary"%></div>
-            <div class="btn-group">
-              <%= link_to "Delete", wishlist_item_path(wishlist_id: @current_wishlist.id, id: wishlist_item.id), { data: { confirm: "Are you sure you wish to delete the item '#{wishlist_item.sale_item.item_name}' from your wishlist?"}, method: :delete, remote: true, class: "btn btn-danger" } %>
+            <% if Wishlist.find(params[:id]).user_id.to_i == current_user.id.to_i%>
+              <div class="btn-group">
+              <%= link_to "Delete", wishlist_item_path(wishlist_id: wishlist_item.wishlist_id, id: wishlist_item.id), { data: { confirm: "Are you sure you wish to delete the item '#{wishlist_item.sale_item.item_name}' from your wishlist?"}, method: :delete, remote: true, class: "btn btn-danger" } %>
               </div>
+            <% end  %>
             </div>
           </div>
         </div>

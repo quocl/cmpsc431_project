@@ -16,11 +16,13 @@
     <% else %>
       <% @wishlists2.each do |wishlist| %>
         <tr>
-          <td><%= wishlist.name %></td>
-          <td>&nbsp</td>
-          <td><%= wishlist.user_id %></td>
-          <td>&nbsp</td>
-          <td><%= link_to 'Show', wishlist %></td>
+          <td><text style="font-size: 15px;"><%= wishlist.name %></text></td>
+          
+          <td><text style="font-size: 15px;"><%= @users.find(wishlist.user_id).email %></text></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td><%= link_to 'Show', wishlist , :class => "btn btn-primary"%></td>
         </tr>
       <% end %>
     <% end %>

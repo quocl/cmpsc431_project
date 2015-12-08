@@ -1,4 +1,4 @@
-<%= form_for(@delivery) do |f| %>
+<%= form_for @delivery do |f| %>
   <% if @delivery.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@delivery.errors.count, "error") %> prohibited this delivery from being saved:</h2>
@@ -10,20 +10,110 @@
       </ul>
     </div>
   <% end %>
+    
+   
+        <% if @order.order_items.size == 0 %>
+            <p class="text-center">
+              There are no items in your shopping cart.  Please <%= link_to "go back", root_path %> and add some items to your cart.
+            </p> %>
+        <% else %>
+            <table class = "table table-striped">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Item amount</th>
+                <th>Subtotal</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @order.order_items.each do |order_item| %>
+            <tr>
+              <td><%= @sale_items.find(order_item.sale_item_id).item_name %></td>
+              <td><%= order_item.quantity %></td>
+              <td><%= number_to_currency order_item.total_price %></td>
+            </tr>
+          <% end %>
+             </tbody>
+              </table>
+          <h3 class="text-right">Total Price: <span style="color: green"><%= number_to_currency @order.subtotal %></span></h3>
+        <% end %>
 
-  <div class="field">
-    <%= f.label :address_id %><br>
-    <%= f.text_field :address_id %>
+
+  <div class="row">
+  <div class="field col-xs-6">
+  <div class"field col-xs-3"=>
+  <%= f.label :address_id %>
+  </div>       
+  <%= render "address_row"%>
+  <div class="col-xs-0  ">
+
+      <% if current_user.addresses.size == 0 %>
+
+        <select><option>You don't have a stored address yet.</option></select>
+
+      <% else %>
+           
+          <%= f.select :address_id, options_from_collection_for_select(current_user.addresses, 'id', 'name'), {:include_blank => "Select a presaved addresses"}%>
+
+          <script>
+            $(document).ready(function() {
+              $('#delivery_address_id').change(function() {
+                $.ajax({
+                  url: "<%= update_address_path %>",
+                  data: {
+                    add_id : $('#delivery_address_id').val()
+                  },
+                  dataType: "script"
+                });
+              });
+            });
+          </script>
+            
+
+      <% end %>
+
   </div>
-  <div class="field">
-    <%= f.label :card_id %><br>
-    <%= f.text_field :card_id %>
   </div>
-  <div class="field">
-    <%= f.label :trackingnumber %><br>
-    <%= f.text_field :trackingnumber %>
+
+  <div class="field col-xs-6">
+  <div class"field col-xs-3"=>
+  <%= f.label :card_id %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <%= render "card_row" %>
+  <div class="col-xs-0  ">
+
+      <% if current_user.addresses.size == 0 %>
+
+        <select><option>You don't have a stored card yet.</option></select>
+
+      <% else %>
+        
+          <%= f.select :card_id, options_from_collection_for_select(current_user.cards, 'id', 'name'), {:include_blank => "Select a presaved card"}%>
+
+          <script>
+            $(document).ready(function() {
+              $('#delivery_card_id').change(function() {
+                $.ajax({
+                  url: "<%= update_card_path %>",
+                  data: {
+                    c_id : $('#delivery_card_id').val()
+                  },
+                  dataType: "script"
+                });
+              });
+            });
+          </script>
+
+
+            
+
+      <% end %>
+
+  </div>
+  </div>
+  </div>
+  <div class="actions text-right">
+    <%= f.submit :class => "btn btn-primary"%>
   </div>
 <% end %>

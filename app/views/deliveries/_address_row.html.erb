@@ -1,0 +1,16 @@
+    <div class"field col-xs-3 id" id = "address_text">
+    <% if @address_selected.nil? %>
+    	<%= "You don't have a address selected." %>
+    <% else %>
+    	<%= "#{@address_selected.street}" %>
+      <br>
+      <%= "#{@address_selected.city}" %>
+      <br>
+      <%= "#{@address_selected.zipcode}" %>
+      <br>
+      <%= "#{@address_selected.addrType}" %>
+      <br>
+    <% end %>
+  	</div>
+
+  

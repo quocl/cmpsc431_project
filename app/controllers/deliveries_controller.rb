@@ -10,16 +10,25 @@ class DeliveriesController < ApplicationController
   # GET /deliveries/1
   # GET /deliveries/1.json
   def show
+    @delivery = Delivery.find(params[:id])
+    @order = Order.find(@delivery.order_id)
+    @sale_items = current_sale_items
   end
 
   # GET /deliveries/new
   def new
     @order = current_order
     @delivery = Delivery.new
+    @sale_items = current_sale_items
+    @address_selected = nil
+    @card_selected = nil
   end
 
   # GET /deliveries/1/edit
   def edit
+    @delivery = Delivery.find(params[:id])
+    @order = Order.find(@delivery.order_id)
+    @sale_items = current_sale_items
   end
 
   # POST /deliveries
@@ -32,10 +41,13 @@ class DeliveriesController < ApplicationController
     @addresses = current_user.addresses
     @cards = current_user.cards
     
-    respond_to do |format|
+  respond_to do |format|
       if @delivery.save
-        format.html { redirect_to @delivery, notice: 'Order was successfully placed.' }
-        format.json { render :show, status: :created, location: @delivery }
+        @order = Order.new
+        session[:order_id] = @order.id
+        current_order = @order
+        format.html { redirect_to profile_url, notice: 'Order was successfully placed.' }
+        format.json { render :show, status: :created, location: profile_url }
       else
         format.html { render :new }
         format.json { render json: @delivery.errors, status: :unprocessable_entity }
@@ -47,11 +59,11 @@ class DeliveriesController < ApplicationController
   # PATCH/PUT /deliveries/1.json
   def update
     respond_to do |format|
-      if @delivery.update(delivery_params)
-        format.html { redirect_to @delivery, notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :ok, location: @delivery }
+      if @delivery.save
+        format.html { redirect_to profile_url, notice: 'Order was successfully updated.' }
+        format.json { render :show, status: :created, location: profile_url }
       else
-        format.html { render :edit }
+        format.html { render :new }
         format.json { render json: @delivery.errors, status: :unprocessable_entity }
       end
     end
@@ -62,9 +74,17 @@ class DeliveriesController < ApplicationController
   def destroy
     @delivery.destroy
     respond_to do |format|
-      format.html { redirect_to deliveries_url, notice: 'Order was successfully canceled.' }
+      format.html { redirect_to profile_url, notice: 'Order was successfully canceled.' }
       format.json { head :no_content }
     end
+  end
+
+  def update_address
+    @address_selected = Address.find(params[:add_id])
+  end
+
+  def update_card
+    @card_selected = Card.find(params[:c_id])
   end
 
   private

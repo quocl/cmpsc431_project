@@ -1,26 +1,24 @@
 
 <div class="well">
 
+
   <div class="row">
-    <div class="col-xs-8">
-      <h4><%= sale_item.item_name %></small></h4>
-    </div>
+
+    <div class="col-xs-8"><h4><%= sale_item.item_name %></small></h4></div>
+
     <div class="col-xs-8">
       <h5><%= "Seller: #{users.find(sale_item.user_id).email}" rescue nil%></small></h5>
       <h5><%= "Location: #{sale_item.item_location}" rescue nil%></small></h5>
       <h5><%= "Location: #{sale_item.item_description}" rescue nil%></small></h5>
+      <h5><%= link_to "Product reviews", sale_item_product_reviews_path(sale_item.id), :class => "btn btn-warning"%></h5>
     </div>
 
     <div class="col-xs-4">
       <%= form_for order_item, remote: true do |f| %>
         <h5 class="text-right">Remaining amount: <span style="color: red">
-          <%= sale_item.amount %></span></h5>      
-      
-      <%= link_to "Product reviews", sale_item_product_reviews_path(sale_item.id)%> 
-      </br>    
-      <%= link_to "Reviews of this Seller", sale_item_seller_reviews_path(users.find(sale_item.user_id).id)%>    
-
-        <h4 class="text-right">Unit Price: <span style="color: green">
+          <%= sale_item.amount %></span></h5>
+ <%= link_to "Reviews of this Seller", sale_item_seller_reviews_path(users.find(sale_item.user_id).id)%>        
+<h4 class="text-right">Unit Price: <span style="color: green">
           <%= number_to_currency sale_item.item_price %></span></h4>
         <div class="input-group col-xs-1">
           <%= f.number_field :quantity, value: 1, class: "form-control", min: 1, size: 5 %>
@@ -37,24 +35,25 @@
     </div>
 
   </div> 
-    <div class="row"><div class="col-xs-1">&nbsp;</div></div>
-    <div class="row">
-      <div class="col-xs-1">&nbsp;</div>
 
-      <div class="col-xs-7">
+    <div class="row">
+        
+
+      <div class="col-xs-1">
           <% if !current_user.nil? %>
 
             <% if current_user.wishlists.size == 0 %>
-              <select><option>You don't have a wishlst yet.</option></select></div></div>
+
+              <select><option>You don't have a wishlst yet.</option></select>
+
             <% else %>
               
-              <%= form_for wishlist_item, remote: true do |f| %>
-                  <select name="wishlist_item[wishlist_id]" id="wishlist_item_wishlist_id">
-                    <% current_user.wishlists.each do |wishlist| %>
-                      <option value=<%= wishlist.id%>><%= wishlist.name%></option>
-                    <% end %>
-                  </select>
-                  </div>
+              <%= form_for wishlist_item, remote: true, html:{:id=>"wishlist_item_form_#{sale_item.id}"} do |d| %>
+                <%= d.hidden_field :sale_item_id, value: sale_item.id %>
+                <%= d.hidden_field :quantity, value: 1 %>
+                <%= d.hidden_field :unit_price, value: sale_item.item_price %>
+                <%= d.select :wishlist_id, options_from_collection_for_select(current_user.wishlists, 'id', 'name'), {:include_blank => "Please select a wishlist to save", :disabled => 1} ,onchange: "$('#wishlist_item_form_#{sale_item.id}').submit();" %>
+
                   
                   <div class="col-xs-3">
                     <%= f.hidden_field :sale_item_id, value: sale_item.id %>
@@ -65,13 +64,18 @@
               </div>
             <% end %>
 
+
           <% else %>
 
-            <select><option>Register or login to save your item into a wishlist!</option></select></div></div>
+            <select><option>Register or login to save your item into a wishlist!</option></select>
 
           <% end %>
         
 
+        </div>
+        </div>
 
 
 </div>
+
+

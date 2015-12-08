@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_order
   after_filter :store_location
+  before_filter :set_cache_headers
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
@@ -21,10 +22,9 @@ class ApplicationController < ActionController::Base
 
   def current_order
       if !session[:order_id].nil?
-        tmp = Order.find(session[:order_id]) rescue nil
-        return tmp != nil ? tmp : Order.new
+        Order.find(session[:order_id])
       else
-        return Order.new
+        Order.new
       end
   end
 
@@ -32,6 +32,13 @@ class ApplicationController < ActionController::Base
     Category.all
   end
 
+  def current_sale_items
+    SaleItem.all
+  end
+
+  def current_users
+    User.all
+  end
 
   def after_sign_in_path_for(resource)
     session[:previous_url] || root_path
@@ -45,5 +52,13 @@ class ApplicationController < ActionController::Base
        devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :first_name, :last_name, :email, :password, :remember_me) }
        devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :first_name, :last_name, :email, :password, :password_confirmation, :current_password) }
     end 
+
+private
+
+  def set_cache_headers
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
 
 end

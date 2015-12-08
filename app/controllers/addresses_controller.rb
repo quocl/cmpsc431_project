@@ -24,15 +24,12 @@ class AddressesController < ApplicationController
   # POST /addresses
   # POST /addresses.json
   def create
-    @address = Address.new(street: params[:address][:street],
-                           city: params[:address][:city],
-                           zipcode: params[:address][:zipcode],
-                           addrType: params[:address][:addrType],
-                           user_id: current_user.id)
+    @address = Address.new(address_params)
+    @address.user_id = current_user.id
     respond_to do |format|
       if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
-        format.json { render :show, status: :created, location: @address }
+        format.html { redirect_to profile_url, notice: 'Address was successfully created.' }
+        format.json { render :show, status: :created, location: profile_url }
       else
         format.html { render :new }
         format.json { render json: @address.errors, status: :unprocessable_entity }
@@ -45,8 +42,8 @@ class AddressesController < ApplicationController
   def update
     respond_to do |format|
       if @address.update(address_params)
-        format.html { redirect_to @address, notice: 'Address was successfully updated.' }
-        format.json { render :show, status: :ok, location: @address }
+        format.html { redirect_to profile_url, notice: 'Address was successfully updated.' }
+        format.json { render :show, status: :ok, location: profile_url }
       else
         format.html { render :edit }
         format.json { render json: @address.errors, status: :unprocessable_entity }
@@ -72,6 +69,6 @@ class AddressesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_params
-      params.require(:address).permit(:user_id, :add_id, :street, :city, :zipcode, :addrType)
+      params.require(:address).permit(:user_id, :add_id, :street, :city, :zipcode, :addrType, :name)
     end
 end

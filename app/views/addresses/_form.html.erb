@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
   <div class="field">
     <%= f.label :street %><br>
     <%= f.text_area :street %>
@@ -25,7 +28,7 @@
   </div>
   <div class="field">
     <%= f.label :addrType %><br>
-     <%= f.select :addrType, [['Apartment','apartment'],['Residence','residence'],['Business','business']] %>
+     <%= f.select :addrType, [['Apartment','Apartment'],['Residence','Residence'],['Business','Business']] %>
   </div>
   <div class="actions">
     <%= f.submit %>

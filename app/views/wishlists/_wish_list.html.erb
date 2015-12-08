@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 <% if !@wishlist_item.nil? && @wishlist_item.errors.any? %>
   <div class="alert alert-danger">
     <ul>
@@ -7,15 +8,15 @@
     </ul>
   </div>
 <% end %>
-
+<% @wishlist_items.reload %>
 <% if @wishlist_items.size == 0 %>
   <p class="text-center">
     There is no item in this list.
   </p>
 <% else %>
-
+      
       <% @wishlist_items.each do |wishlist_item| %>
-        <%= render 'wishlists/list_row', sale_item: wishlist_item.sale_item, wishlist_item: wishlist_item%>
+        <%= render 'wishlists/list_row', sale_item: wishlist_item.sale_item, wishlist_item: wishlist_item, current_wishlist: @current_wishlist%>
       <%end%>
       
 <% end %>

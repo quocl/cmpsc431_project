@@ -2,27 +2,15 @@ Rails.application.routes.draw do
   
   get 'deliveries/new'
 
-  get 'deliveries/create'
-
-  get 'deliveries/edit'
-  get 'deliveries/index'
-
-  get 'deliveries/update'
-
-  get 'deliveries/delete'
-
-  get 'deliveries/destory'
-
-  get 'carts/show'
-  get 'order_items/display_order_report'
-
+  get "deliveries/update_address", :as => "update_address"
+  get "deliveries/update_card", :as => "update_card"
   resources :addresses
   devise_for :users
 
-  resources :categories do
-    resources :sale_items do
-    end
-  end
+  # resources :categories do
+  #   resources :sale_items do
+  #   end
+  # end
   resources :categories do
     member do
       get :sale_items
@@ -37,9 +25,10 @@ Rails.application.routes.draw do
 
   resources :cards
   resources :sale_items
+resources :deliveries
   resources :seller_reviews
   resources :wishlists
-  resources :wishlist_items
+  resources :wishlist_items, only: [:create, :update, :destroy]
   resource :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
   root to: "sale_items#index"

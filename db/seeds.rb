@@ -17,8 +17,12 @@ user3.save!
 
 Category.delete_all
 
-cat = Category.create! id: 1, name: "Test"
+cat = Category.create! id: 1, name: "All items"
 cat.save!
+
+Wishlist.delete_all
+wish = Wishlist.create! user_id: 2, name: "TestWishlist", shared: "public"
+
 
 SaleItem.delete_all
 a = SaleItem.create! id: 1, user_id: "PrimeJD@JD.com", item_name: "Dumb", item_price: 5, item_description: "This is a text item." , item_location: "PA", amount: 5, category_id: 1

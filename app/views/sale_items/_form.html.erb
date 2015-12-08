@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :item_location %><br>
-    <%= f.text_field :item_location %>
+     <%= f.select :item_location, options_from_collection_for_select(current_user.addresses, 'city', 'name'), {:prompt => "please add an address to sell items."}%>
   </div>
   <div class="field">
     <%= f.label :amount %><br>

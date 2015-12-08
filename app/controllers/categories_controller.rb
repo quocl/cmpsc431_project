@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     @category = Category.find(params[:id])
-    @child_categories = @category.childcategories
+    @child_categories = @category.subcategories
   end
 
   def sale_items
@@ -20,18 +20,20 @@ class CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
+    @categories = Category.all # parent categories to choose from
     @category = Category.new
   end
 
   # GET /categories/1/edit
   def edit
+    @categories = Category.all # parent categories to choose from
   end
 
   # POST /categories
   # POST /categories.json
   def create
     @category = Category.new(category_params)
-
+    @category.parentcategory = Category.find(category_params[:category_id])
     respond_to do |format|
       if @category.save
         format.html { redirect_to @category, notice: 'Category was successfully created.' }
@@ -75,6 +77,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name)
+      params.require(:category).permit(:name, :category_id)
     end
 end
