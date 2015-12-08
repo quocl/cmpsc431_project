@@ -66,9 +66,6 @@ class DeliveriesController < ApplicationController
   # PATCH/PUT /deliveries/1
   # PATCH/PUT /deliveries/1.json
   def update
-    if !delivery_params[:trackingnumber].nil?
-      @delivery.trackingnumber = delivery_params[:trackingnumber]
-    end
     respond_to do |format|
       if @delivery.save
         format.html { redirect_to profile_url, notice: 'Order was successfully updated.' }
@@ -106,6 +103,6 @@ class DeliveriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delivery_params
-      params.require(:delivery).permit(:order_id, :user_id, :address_id, :card_id, :trackingnumber)
+      params.require(:delivery).permit(:order_id, :user_id, :address_id, :card_id, :shipped)
     end
 end

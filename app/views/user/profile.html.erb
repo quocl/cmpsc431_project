@@ -91,7 +91,7 @@
       <th>User</th>
       <th>Address</th>
       <th>Card</th>
-      <th>Trackingnumber</th>
+      <th>shipped</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -103,10 +103,10 @@
         <td><%= delivery.user.username %></td>
         <td><%= Address.find(delivery.address_id).street %></td>
         <td><%= Card.find(delivery.card_id).card_number %></td>
-        <% if delivery.trackingnumber.nil? %>
+        <% if delivery.shipped.nil? %>
           <td><%= "Not shipped yet."%></td>
         <% else %>
-          <td><%= delivery.trackingnumber%></td>
+          <td><%= delivery.shipped %></td>
         <% end %>
         <td><%= link_to 'Show Item Details', delivery ,:class=>"btn btn-primary btn-xs"%></td>
         <td><%= link_to 'Change Details', edit_delivery_path(delivery), :class=>"btn btn-primary btn-xs" %></td>
@@ -222,7 +222,7 @@
       <th>Shipping Address</th>
       <th>Item Name</th>
       <th>Quantity</th>
-      <th>Trackingnumber</th>
+      <th>shipped</th>
 
       <th colspan="3"></th>
     </tr>
@@ -238,13 +238,13 @@
             <%= Address.find(ordered_item.delivery.address_id).zipcode %></td>
         <td><%= ordered_item.sale_item.item_name%></td>
         <td><%= ordered_item.quantity%></td>
-        <% if ordered_item.delivery.trackingnumber.nil? %>
+        <% if ordered_item.trackingnumber.nil? %>
           <td><%= "Not shipped yet."%></td>
         <% else %>
-          <td><%= ordered_item.delivery.trackingnumber%></td>
+          <td><%= ordered_item.trackingnumber%></td>
         <% end %>
         <td><%= link_to 'Show Item Details', ordered_item,:class=>"btn btn-primary btn-xs"%></td>
-        <td><%= link_to 'Fulfill This Order', ordered_item_path(ordered_item), method: :delete, :class=>"btn btn-danger btn-xs"%></td>
+        <td><%= link_to 'Fulfill This Order', edit_ordered_item_path(ordered_item), :class=>"btn btn-danger btn-xs"%></td>
       </tr>
     <% end %>
   </tbody>

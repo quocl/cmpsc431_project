@@ -22,13 +22,13 @@ Rails.application.routes.draw do
   end
 
   resources :product_reviews
-
+  resources :ordered_items
   resources :cards
   resources :sale_items
 resources :deliveries
   resources :seller_reviews
   resources :wishlists
-  resources :ordered_items, only: [:new, :create, :delete, :destroy]
+  resources :ordered_items, only: [:new, :create, :edit, :update]
   resources :wishlist_items, only: [:create, :update, :destroy]
   resource :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
