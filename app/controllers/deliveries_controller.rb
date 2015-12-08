@@ -66,10 +66,13 @@ class DeliveriesController < ApplicationController
   # PATCH/PUT /deliveries/1
   # PATCH/PUT /deliveries/1.json
   def update
+    if !delivery_params[:trackingnumber].nil?
+      @delivery.trackingnumber = delivery_params[:trackingnumber]
+    end
     respond_to do |format|
       if @delivery.save
         format.html { redirect_to profile_url, notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :created, location: profile_url }
+        format.json { render :show, status: :updated, location: profile_url }
       else
         format.html { render :new }
         format.json { render json: @delivery.errors, status: :unprocessable_entity }
