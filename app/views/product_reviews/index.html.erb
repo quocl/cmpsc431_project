@@ -1,8 +1,12 @@
 <h3>Product Reviews:</h3>
 
-<table>
+<table class = "table table-striped">
   <thead>
     <tr>
+      <th>Rating</th>
+      <th>User</th>
+      <th>Titile</th>
+      <th>Content</th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -10,16 +14,20 @@
   <tbody>
     <% @product_reviews.each do |productReview| %>
       
-      <tr height = "40" style="vertical-align:bottom">
-        <td><i>Rating: <%= productReview.rating %> / 5</i></td>
-      </tr>
-
       <tr>
+        <td><i><%= productReview.rating %> / 5</i></td>
+        <td><i><%= User.find(productReview.user_id).email %> / 5</i></td>
+      
+
+      
         <td><b><%= productReview.review_title %></b></td>
-      </tr>
+      
 
-      <tr>
+      
         <td><%= productReview.review_content %></td>
+        <% if current_user.id.to_i == productReview.user_id.to_i%>
+          <td><%= link_to 'Destroy', product_review_path(productReview.id), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs" %></td>
+        <% end %>
       </tr>
 
     <% end %>

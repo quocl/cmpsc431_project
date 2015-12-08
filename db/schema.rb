@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208192710) do
+ActiveRecord::Schema.define(version: 20151208213255) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -117,9 +117,11 @@ ActiveRecord::Schema.define(version: 20151208192710) do
     t.text     "review_content"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "user_id"
   end
 
   add_index "product_reviews", ["sale_item_id"], name: "index_product_reviews_on_sale_item_id"
+  add_index "product_reviews", ["user_id"], name: "index_product_reviews_on_user_id"
 
   create_table "sale_items", force: :cascade do |t|
     t.integer  "user_id"

@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :ordered_items
   resources :cards
   resources :sale_items
-resources :deliveries
+  resources :deliveries
   resources :seller_reviews
   resources :wishlists
   resources :ordered_items, only: [:new, :create, :edit, :update]
