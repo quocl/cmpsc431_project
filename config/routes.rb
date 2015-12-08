@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+   
+
   get "deliveries/update_address", :as => "update_address"
   get "deliveries/update_card", :as => "update_card"
   resources :addresses
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
   resources :deliveries
   resources :seller_reviews
   resources :wishlists
+  resources :ordered_items, only: [:create, :delete, :destroy]
   resources :wishlist_items, only: [:create, :update, :destroy]
   resource :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
