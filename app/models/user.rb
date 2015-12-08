@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :deliveries
   has_many :sale_items
   has_many :ordered_items
-  has_many :seller_reivews
+  has_many :seller_reviews
   validates :email, :first_name, :last_name, :username, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable

@@ -1,4 +1,5 @@
 class DeliveriesController < ApplicationController
+  before_filter :authenticate_user!, :only => [:edit, :update, :destroy, :create]
   before_action :set_delivery, only: [:show, :edit, :update, :destroy]
 
   # GET /deliveries

@@ -1,5 +1,5 @@
 class SellerReviewsController < ApplicationController
-
+  before_filter :authenticate_user!, :only => [:new, :edit, :update, :destroy, :create]
   def index
     @seller_reviews = SellerReview.where(seller_id: SaleItem.find(params[:format]).user_id)
   end
@@ -28,6 +28,7 @@ class SellerReviewsController < ApplicationController
 
     respond_to do |format|
       if @seller_review.save
+        User.find(@seller_review.seller_id).seller_reviews << @seller_review
         format.html { redirect_to @seller_review, notice: 'Seller review was successfully created.' }
         format.json { render :show, status: :created, location: @seller_review}
       else
@@ -38,10 +39,11 @@ class SellerReviewsController < ApplicationController
   end
 
   def destroy
-    sellerreviews = SellerReview.find(params[:id])
-    sellerreviews.destroy
+    seller_review = SellerReview.find(params[:id])
+    User.find(seller_review.seller_id).seller_reviews.find(params[:id]).destroy
+    seller_review.destroy
     respond_to do |format|
-      format.html { redirect_to sale_item_url, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to sale_items_url, notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

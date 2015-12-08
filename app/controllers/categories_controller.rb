@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_filter :authenticate_user!, :only => [:edit, :update, :destroy, :create]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /categories
