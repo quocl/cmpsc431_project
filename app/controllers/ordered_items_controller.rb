@@ -25,6 +25,9 @@ class OrderedItemsController < ApplicationController
       		a.shipped += 1
       		a.save
       	end
+      	b = OrderItem.find_by sale_item_id: @ordered_item.sale_item_id
+      	b.trackingnumber = @ordered_item.trackingnumber
+      	b.save
         format.html { redirect_to profile_url, notice: 'Order was successfully fulfilled.' }
         format.json { render :show, status: :updated, location: profile_url }
       else

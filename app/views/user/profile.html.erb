@@ -218,7 +218,7 @@
 <thead>
     <tr>
       <th>Order Date</th>
-      <th>User</th>
+      <th>Buyer</th>
       <th>Shipping Address</th>
       <th>Item Name</th>
       <th>Quantity</th>
@@ -236,7 +236,7 @@
         <td><%= Address.find(ordered_item.delivery.address_id).street %>
             <%= Address.find(ordered_item.delivery.address_id).city %>
             <%= Address.find(ordered_item.delivery.address_id).zipcode %></td>
-        <td><%= ordered_item.sale_item.item_name%></td>
+        <td><%= SaleItem.find(ordered_item.sale_item_id).item_name%></td>
         <td><%= ordered_item.quantity%></td>
         <% if ordered_item.trackingnumber.nil? %>
           <td><%= "Not shipped yet."%></td>

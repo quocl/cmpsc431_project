@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208183332) do
+ActiveRecord::Schema.define(version: 20151208192710) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20151208183332) do
     t.integer  "user_id"
     t.integer  "address_id"
     t.integer  "card_id"
-    t.string   "shipped"
+    t.integer  "shipped"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -66,11 +66,12 @@ ActiveRecord::Schema.define(version: 20151208183332) do
   create_table "order_items", force: :cascade do |t|
     t.integer  "sale_item_id"
     t.integer  "order_id"
-    t.decimal  "unit_price",   precision: 12, scale: 2
+    t.decimal  "unit_price",     precision: 12, scale: 2
     t.integer  "quantity"
-    t.decimal  "total_price",  precision: 12, scale: 2
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.decimal  "total_price",    precision: 12, scale: 2
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "trackingnumber"
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
