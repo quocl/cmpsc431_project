@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
   get 'order_items/display_order_report'
-  
-  get 'deliveries/new'
-
    
 
   get "deliveries/update_address", :as => "update_address"

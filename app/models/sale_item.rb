@@ -17,11 +17,6 @@ class SaleItem < ActiveRecord::Base
         text :item_location
     end
 
-    def self.search(search)
-        if search
-            where("item_name like ?","%#{search}%")
-        end
-    end
 
 
     

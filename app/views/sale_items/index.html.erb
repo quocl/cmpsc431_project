@@ -16,7 +16,19 @@
 	</div>
   <br>
 
-  <%= render "search_criteria_form"%>
+  <div>
+<%= form_tag sale_items_path, :method => :get do %>
+<p>
+<%= text_field_tag :search, params[:search] %>
+<%= submit_tag "Search", :name => nil %>
+</p>
+<% end %>
+</div>
+    Can't decide what to search for? 
+    <br>
+    See what others are buying in our public.
+    <br>
+    <%= link_to "order reports", { :controller => :order_items, :action => :display_order_report }, class: "btn btn-primary btn-xs"%>.
 
 <%= javascript_tag do %>
   function redirectToSaleItem(current_category){

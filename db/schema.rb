@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204161113) do
+ActiveRecord::Schema.define(version: 20151208010224) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -75,6 +75,17 @@ ActiveRecord::Schema.define(version: 20151204161113) do
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
   add_index "order_items", ["sale_item_id"], name: "index_order_items_on_sale_item_id"
+
+  create_table "ordered_items", force: :cascade do |t|
+    t.integer  "delivery_id"
+    t.integer  "user_id"
+    t.integer  "quantity"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "ordered_items", ["delivery_id"], name: "index_ordered_items_on_delivery_id"
+  add_index "ordered_items", ["user_id"], name: "index_ordered_items_on_user_id"
 
   create_table "orders", force: :cascade do |t|
     t.decimal  "subtotal",        precision: 12, scale: 2
