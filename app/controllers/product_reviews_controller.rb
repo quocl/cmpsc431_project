@@ -1,21 +1,17 @@
 class ProductReviewsController < ApplicationController
 
   def index
-    #@idToGet = params[:id]
     @product_reviews = ProductReview.where(item_id: params[:sale_item_id])
   end
 
   # GET /productreviews/1
   # GET /productreviews/1.json
   def show
-    @idToGet = params[:id]
-    @product_review = ProductReview.where(id: @idToGet)
 
   end
 
   # GET /productreviews/new
   def new
-    @idToGet = params[:id]
     @product_review = ProductReview.new
   end
 

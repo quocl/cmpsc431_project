@@ -1,3 +1,4 @@
+
 class SaleItem < ActiveRecord::Base
 	belongs_to :user
 	validates :user_id, presence: true
@@ -15,4 +16,13 @@ class SaleItem < ActiveRecord::Base
         text :item_name, :default_boost => 5
         text :item_location
     end
+
+    def self.search(search)
+        if search
+            where("item_name like ?","%#{search}%")
+        end
+    end
+
+
+    
 end

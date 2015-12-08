@@ -1,9 +1,5 @@
 <%= form_for(@seller_review) do |sr| %>
   
-  <div class="field">
-    <%= sr.label :seller_id %><br>
-    <%= sr.text_field :seller_id %>
-  </div>
 
   <div class="field">
     <%= sr.label :rating %><br>
@@ -19,6 +15,8 @@
     <%= sr.label :review_content %><br>
     <%= sr.text_area :review_content %>
   </div>
+
+  <%= sr.hidden_field :seller_id, :value => params[:sale_item_id] %>
 
   <div class="actions">
     <%= sr.submit %>

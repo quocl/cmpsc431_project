@@ -1,4 +1,8 @@
 class OrderItemsController < ApplicationController
+  def display_order_report
+      @all_order_records = OrderItem.all
+  end
+
   def create
     @order = current_order
       if !@order.order_items.find_by sale_item_id: order_item_params[:sale_item_id]

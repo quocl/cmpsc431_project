@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>A report of all recently placed orders:</h1>
+<i>All orders shown were placed later than 7 days ago.</i>
+Click <%= link_to 'here', sale_items_path %> to go back to view sale items.
+
+
+	<table border="1">
+    <tr height = "40">
+      <td style='padding:3px 10px 3px 10px'>Order ID</td>
+      <td style='padding:3px 10px 3px 10px'>Item Purchased</td>
+      <td style='padding:3px 10px 3px 10px'>Unit Price</td>
+      <td style='padding:3px 10px 3px 10px'>Quantity Purchased</td>
+      <td style='padding:3px 10px 3px 10px'>Total Price</td>
+      <td style='padding:3px 10px 3px 10px'>Location</td>
+      <td style='padding:3px 10px 3px 10px'>Seller</td>
+    </tr>
+
+   	<% @all_order_records.each do |orderRec| %>
+
+
+
+      <tr height = "40" style="vertical-align:bottom">
+      	<td style='padding:3px 10px 3px 10px'><i><%= orderRec.order_id %></i></td>
+      	<td style='padding:3px 10px 3px 10px'> <%= "#{SaleItem.find(orderRec.sale_item_id).item_name}" rescue nil%> </td>
+        <td style='padding:3px 10px 3px 10px'><i><%= orderRec.unit_price %></i></td>
+        <td style='padding:3px 10px 3px 10px'><i><%= orderRec.quantity %></i></td>
+        <td style='padding:3px 10px 3px 10px'><i><%= orderRec.total_price %></i></td>
+        <td style='padding:3px 10px 3px 10px'> <%= "#{SaleItem.find(orderRec.sale_item_id).item_location}" rescue nil%> </td>   
+        <td style='padding:3px 10px 3px 10px'> <%= "#{User.find(SaleItem.find(orderRec.sale_item_id).user_id).username}" rescue nil%> </td>
+      </tr>
+
+
+    <% end %>
+	
+	</table>

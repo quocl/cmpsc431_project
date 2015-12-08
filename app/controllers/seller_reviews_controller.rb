@@ -1,7 +1,7 @@
 class SellerReviewsController < ApplicationController
 
   def index
-    @seller_reviews = SellerReview.all
+    @seller_reviews = SellerReview.where(seller_id: params[:sale_item_id])
   end
 
   # GET /productreviews/1
@@ -22,7 +22,7 @@ class SellerReviewsController < ApplicationController
   # POST /product_reviews
   # POST /product_reviews.json
   def create
-    @seller_review = SellerReview.new(seller_review_params, reviewer_id: current_user.email)
+    @seller_review = SellerReview.new(seller_review_params, seller_id: params[:sale_item_id])
 
     respond_to do |format|
       if @seller_review.save

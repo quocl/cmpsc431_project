@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'order_items/display_order_report'
+  
+  get 'deliveries/new'
 
    
 
@@ -18,10 +21,14 @@ Rails.application.routes.draw do
   end 
   resources :sale_items do
     resources :product_reviews
+    resources :seller_reviews
   end
 
+  resources :product_reviews
+
   resources :cards
-  resources :deliveries
+  resources :sale_items
+resources :deliveries
   resources :seller_reviews
   resources :wishlists
   resources :ordered_items, only: [:create, :delete, :destroy]
