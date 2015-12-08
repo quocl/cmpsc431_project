@@ -1,7 +1,7 @@
 class ProductReviewsController < ApplicationController
 
   def index
-    @product_reviews = ProductReview.where(sale_item_id: params[:id])
+    @product_reviews = ProductReview.where(sale_item_id: params[:format])
   end
 
   # GET /productreviews/1
@@ -12,6 +12,7 @@ class ProductReviewsController < ApplicationController
   # GET /productreviews/new
   def new
     @product_review = ProductReview.new
+    @sale_item_id = params[:format]
   end
 
   # GET /productreviews/1/edit
@@ -39,7 +40,7 @@ class ProductReviewsController < ApplicationController
     productreviews = ProductReview.find(params[:id])
     productreviews.destroy
     respond_to do |format|
-      format.html { redirect_to product_reviews_url, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to sale_items_url, notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

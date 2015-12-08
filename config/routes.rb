@@ -16,10 +16,6 @@ Rails.application.routes.draw do
       get :sale_items
     end
   end 
-  resources :sale_items do
-    resources :product_reviews
-    resources :seller_reviews
-  end
 
   resources :product_reviews
   resources :ordered_items

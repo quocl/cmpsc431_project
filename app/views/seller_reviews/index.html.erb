@@ -1,26 +1,30 @@
-<h3>Seller Reviews:</h3>
+<h3>Seller Reviews for <%= User.find(SaleItem.find(params[:format]).user_id).email%></h3>
 
-
-<table>
+<table class= "table table-striped">
   <thead>
     <tr>
+      <th>Rating</th>
+      <th>Reviewer</th>
+      <th>Titile</th>
+      <th>Content</th>
       <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @seller_reviews.each do |sellerReview| %>
-
-      <tr height = "40" style="vertical-align:bottom">
-        <td><i>Rating: <%= sellerReview.rating %> / 5</i></td>
-      </tr>
-
+      
       <tr>
+        <td><i><%= sellerReview.rating %> / 5</i></td>
+        <td><i><%= User.find(sellerReview.reviewer_id).email %></i></td>
         <td><b><%= sellerReview.review_title %></b></td>
-      </tr>
+      
 
-      <tr>
+      
         <td><%= sellerReview.review_content %></td>
+        <% if current_user.id.to_i == sellerReview.reviewer_id.to_i%>
+          <td><%= link_to 'Destroy', seller_review_path(sellerReview.id), method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs" %></td>
+        <% end %>
       </tr>
 
     <% end %>
@@ -29,4 +33,4 @@
 
 <br>
 
-<%= link_to "New Review", { :controller => :seller_reviews, :action => :new }%>
+<%= link_to "New Review", { :controller => :seller_reviews, :action => :new, :format => params[:format] }, class: "btn btn-primary"%>

@@ -1,5 +1,5 @@
 <h3>Product Reviews:</h3>
-
+<%= params%>
 <table class = "table table-striped">
   <thead>
     <tr>
@@ -16,11 +16,8 @@
       
       <tr>
         <td><i><%= productReview.rating %> / 5</i></td>
-        <td><i><%= User.find(productReview.user_id).email %> / 5</i></td>
-      
-
-      
-        <td><b><%= productReview.review_title %></b></td>
+        <td><i><%= User.find(productReview.user_id).email %></i></td>
+      <td><b><%= productReview.review_title %></b></td>
       
 
       
@@ -36,4 +33,4 @@
 
 <br>
 
-<%= link_to "New Review", { :controller => :product_reviews, :action => :new }, class: "btn btn-primary"%>
+<%= link_to "New Review", { :controller => :product_reviews, :action => :new , :format => params[:format]}, class: "btn btn-primary"%>

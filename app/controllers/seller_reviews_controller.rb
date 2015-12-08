@@ -1,37 +1,48 @@
 class SellerReviewsController < ApplicationController
 
   def index
-    @seller_reviews = SellerReview.where(seller_id: params[:sale_item_id])
+    @seller_reviews = SellerReview.where(seller_id: SaleItem.find(params[:format]).user_id)
   end
 
-  # GET /productreviews/1
-  # GET /productreviews/1.json
+  # GET /sellerreviews/1
+  # GET /sellerreviews/1.json
   def show
-  	@seller_review = SellerReview.new
   end
 
-  # GET /productreviews/new
+  # GET /sellerreviews/new
   def new
     @seller_review = SellerReview.new
+    @sale_item_id = params[:format]
   end
 
-  # GET /productreviews/1/edit
+  # GET /sellerreviews/1/edit
   def edit
   end
 
-  # POST /product_reviews
-  # POST /product_reviews.json
+  # POST /seller_reviews
+  # POST /seller_reviews.json
   def create
-    @seller_review = SellerReview.new(seller_review_params, seller_id: params[:sale_item_id])
+    @seller_review = SellerReview.new(seller_review_params)
+    @seller_review.reviewer_id = current_user.id
+
 
     respond_to do |format|
       if @seller_review.save
         format.html { redirect_to @seller_review, notice: 'Seller review was successfully created.' }
-        format.json { render :show, status: :created, location: @seller_review }
+        format.json { render :show, status: :created, location: @seller_review}
       else
         format.html { render :new }
         format.json { render json: @seller_review.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def destroy
+    sellerreviews = SellerReview.find(params[:id])
+    sellerreviews.destroy
+    respond_to do |format|
+      format.html { redirect_to sale_item_url, notice: 'Review was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 
