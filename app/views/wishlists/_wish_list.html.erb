@@ -1,3 +1,5 @@
+
+<h1><%= "#{User.find(@current_wishlist.user_id).email}'s wishlist: " + @current_wishlist.name%></h1>
 <p id="notice"><%= notice %></p>
 <% if !@wishlist_item.nil? && @wishlist_item.errors.any? %>
   <div class="alert alert-danger">
