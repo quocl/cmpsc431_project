@@ -1,6 +1,7 @@
 class OrderedItemsController < ApplicationController
   
   def delete
+
   end
 
   def create
@@ -8,5 +9,8 @@ class OrderedItemsController < ApplicationController
   end
 	
   def destroy
+  	@delivery = OrderedItem.find(params[:id]).delivery
+  	@order = Order.find(@delivery.order_id)
+    @sale_items = current_sale_items
   end  
 end

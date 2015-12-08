@@ -43,6 +43,14 @@ class DeliveriesController < ApplicationController
     
   respond_to do |format|
       if @delivery.save
+        @order.order_items.each do |order_item|
+          ordered_item = OrderedItem.new
+          ordered_item.sale_item = SaleItem.find(order_item.sale_item_id)
+          ordered_item.sale_item_id = order_item.sale_item_id
+          ordered_item.delivery_id = @delivery.id
+          ordered_item.quantity = order_item.quantity
+          User.find(SaleItem.find(order_item.sale_item_id).user_id).ordered_items << ordered_item
+        end
         @order = Order.new
         session[:order_id] = @order.id
         current_order = @order

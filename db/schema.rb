@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208010224) do
+ActiveRecord::Schema.define(version: 20151208160538) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -80,11 +80,13 @@ ActiveRecord::Schema.define(version: 20151208010224) do
     t.integer  "delivery_id"
     t.integer  "user_id"
     t.integer  "quantity"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "sale_item_id"
   end
 
   add_index "ordered_items", ["delivery_id"], name: "index_ordered_items_on_delivery_id"
+  add_index "ordered_items", ["sale_item_id"], name: "index_ordered_items_on_sale_item_id"
   add_index "ordered_items", ["user_id"], name: "index_ordered_items_on_user_id"
 
   create_table "orders", force: :cascade do |t|
@@ -106,7 +108,7 @@ ActiveRecord::Schema.define(version: 20151208010224) do
   end
 
   create_table "product_reviews", force: :cascade do |t|
-    t.string   "item_id"
+    t.integer  "sale_item_id"
     t.string   "item_name"
     t.float    "rating"
     t.text     "review_title"
@@ -114,6 +116,8 @@ ActiveRecord::Schema.define(version: 20151208010224) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  add_index "product_reviews", ["sale_item_id"], name: "index_product_reviews_on_sale_item_id"
 
   create_table "sale_items", force: :cascade do |t|
     t.integer  "user_id"
@@ -125,9 +129,11 @@ ActiveRecord::Schema.define(version: 20151208010224) do
     t.datetime "updated_at",       null: false
     t.integer  "category_id"
     t.integer  "amount"
+    t.integer  "ordered_item_id"
   end
 
   add_index "sale_items", ["category_id"], name: "index_sale_items_on_category_id"
+  add_index "sale_items", ["ordered_item_id"], name: "index_sale_items_on_ordered_item_id"
 
   create_table "seller_reviews", force: :cascade do |t|
     t.string   "seller_id"

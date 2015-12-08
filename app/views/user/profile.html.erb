@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 <h2>Hello <%= "#{@user.first_name} #{@user.last_name}" %></h2>
 <hr>
-<h4>
+<h3>
 	Address
-</h4>
+</h3>
 <div>
    <table class = "table table-striped">
   <thead>
@@ -29,9 +29,9 @@
 <%= link_to 'Add address', new_address_path, :class => "btn btn-primary btn-sm"%>
 </div>
 <hr>
-<h4>
+<h3>
 	Payment information
-</h4>
+</h3>
 
 <div>
   <table class = "table table-striped">
@@ -72,9 +72,9 @@
 <hr>
 
 <div>
-  <h4>
+  <h3>
   Deliveries
-  </h4>
+  </h3>
   <table class = "table table-striped">
 
 <% if @user.deliveries.size == 0 %>
@@ -120,7 +120,7 @@
 
 <hr>
 
-<h4>Wishlists</h4>
+<h3>Wishlists</h3>
 
 <table class = "table table-striped">
   <thead>
@@ -153,13 +153,13 @@
 <%= link_to 'New Wishlist', new_wishlist_path , class: "btn btn-primary" %>
 <br>
 
-<h4>Your items</h4>
+<h3>Your items</h3>
 
 <table class = "table table-striped">
   <thead>
     <tr>
       <th>Item name</th>
-      <th>Item amount</th>
+      <th>Item quantity</th>
       <th>Price</th>
       <th>Category</th>
       <th>Actions </th>
@@ -202,3 +202,52 @@
 <%= link_to 'I wanna sell!', new_sale_item_path, class: "btn btn-primary"  %>
 
 <br>
+
+<div>
+  <h3>Sold Items</h3>
+  <table class = "table table-striped">
+<% if @user.ordered_items.size == 0 %>
+  <tbody>
+  <tr>
+  <td>  Nothing has been ordered from you yet. </td>
+  </tr>
+  </tbody>
+  </table>
+
+<% else %>
+<thead>
+    <tr>
+      <th>Order Date</th>
+      <th>User</th>
+      <th>Shipping Address</th>
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Trackingnumber</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.ordered_items.each do |ordered_item| %>
+      <tr>
+        <td><%= ordered_item.delivery.created_at %></td>
+        <td><%= ordered_item.delivery.user.username %></td>
+        <td><%= Address.find(ordered_item.delivery.address_id).street %>
+            <%= Address.find(ordered_item.delivery.address_id).city %>
+            <%= Address.find(ordered_item.delivery.address_id).zipcode %></td>
+        <td><%= ordered_item.sale_item.item_name%></td>
+        <td><%= ordered_item.quantity%></td>
+        <% if ordered_item.delivery.trackingnumber.nil? %>
+          <td><%= "Not shipped yet."%></td>
+        <% else %>
+          <td><%= ordered_item.delivery.trackingnumber%></td>
+        <% end %>
+        <td><%= link_to 'Show Item Details', ordered_item,:class=>"btn btn-primary btn-xs"%></td>
+        <td><%= link_to 'Fulfill This Order', ordered_item_path(ordered_item), method: :delete, :class=>"btn btn-danger btn-xs"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+     </table>
+<% end %>
+</div>

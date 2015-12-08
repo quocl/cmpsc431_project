@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 resources :deliveries
   resources :seller_reviews
   resources :wishlists
-  resources :ordered_items, only: [:create, :delete, :destroy]
+  resources :ordered_items, only: [:new, :create, :delete, :destroy]
   resources :wishlist_items, only: [:create, :update, :destroy]
   resource :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]

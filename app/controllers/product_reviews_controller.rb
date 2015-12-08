@@ -1,7 +1,7 @@
 class ProductReviewsController < ApplicationController
 
   def index
-    @product_reviews = ProductReview.where(item_id: params[:sale_item_id])
+    @product_reviews = ProductReview.where(sale_item_id: :sale_item_id).all
   end
 
   # GET /productreviews/1

@@ -1,0 +1,30 @@
+<h1>Tracking Number</h1>
+<p>Fill in the tracking number to verify your fulfillment</p>
+
+
+  <table class = "table table-striped">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Item amount</th>
+                <th>Subtotal</th>
+                <th>Location</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @order.order_items.each do |order_item|%>
+            <% if OrderedItem.find(params[:id]).sale_item_id == order_item.sale_item_id.to_i%>
+            <tr>
+              <td><%= @sale_items.find(order_item.sale_item_id).item_name %></td>
+              <td><%= order_item.quantity %></td>
+              <td><%= number_to_currency order_item.total_price %></td>
+              <td><%= Address.find(@delivery.address_id).street %></td>
+            </tr>
+            <%end%>
+            
+          <% end %>
+             </tbody>
+              </table>
+
+
