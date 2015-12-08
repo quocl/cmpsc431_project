@@ -18,7 +18,6 @@
                     &nbsp;
                     &nbsp;
                     <div class="col-xs-12 text-right">
-            <div class="btn-group text-right"><%= link_to "Details", "#",class: "btn btn-primary"%></div>
 
             <div class="col-xs-4">
               <%= form_for @order_item, remote: true do |f| %>
@@ -26,10 +25,9 @@
                   <%= f.hidden_field :sale_item_id, value: sale_item.id %>
                   <%= f.submit "Add to Cart", class: "btn btn-primary" %>
                 </div>
-                </div>
               
               <% end %>
-            </div>
+            
 
             <% if Wishlist.find(params[:id]).user_id.to_i == current_user.id.to_i%>
               <div class="btn-group">
