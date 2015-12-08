@@ -51,6 +51,9 @@ class DeliveriesController < ApplicationController
           ordered_item.delivery_id = @delivery.id
           ordered_item.quantity = order_item.quantity
           User.find(SaleItem.find(order_item.sale_item_id).user_id).ordered_items << ordered_item
+          a = SaleItem.find(order_item.sale_item_id)
+          a.amount -= order_item.quantity
+          a.save
         end
         @order = Order.new
         session[:order_id] = @order.id
@@ -81,6 +84,16 @@ class DeliveriesController < ApplicationController
   # DELETE /deliveries/1
   # DELETE /deliveries/1.json
   def destroy
+    @delivery = Delivery.find(params[:id])
+    order = Order.find(@delivery.order_id)
+    order.order_items.each do |order_item|
+          ordered_item = OrderedItem.find_by sale_item_id: order_item.sale_item_id
+          a = SaleItem.find(order_item.sale_item_id)
+          a.amount += order_item.quantity
+          a.save
+          User.find(SaleItem.find(order_item.sale_item_id).user_id).ordered_items.find(ordered_item.id).destroy
+          ordered_item.destroy
+        end
     @delivery.destroy
     respond_to do |format|
       format.html { redirect_to profile_url, notice: 'Order was successfully canceled.' }
