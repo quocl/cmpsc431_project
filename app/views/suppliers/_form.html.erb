@@ -9,6 +9,8 @@
       <% end %>
       </ul>
     </div>
+
+
   <% end %>
   <div class="field">
     <%= f.label :user_id%><br>
@@ -32,16 +34,15 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+  <%= f.label :address_id%><br>
   <% if @addresses.nil? %>
-  <div class="field">
-    <%= f.label :address_id%><br>
-    <%= f.select :address_id, [["Select an user to update_address",""]] %>
-  </div>
+    <div class="field">
+      <%= f.select :address_id, [["Select an user to update_address",""]] %>
+    </div>
   <% else %>
-  <div class="field">
-    <%= f.label :address_id%><br>
-    <%= f.select :address_id, options_from_collection_for_select(@addresses, 'id', 'name'), {:include_blank => "Select an user to update_address"}%>
-  </div>
+    <div class="field">
+      <%= f.select :address_id, options_from_collection_for_select(@addresses, 'id', 'name'), {:include_blank => "Select an user to update_address"}%>
+    </div>
   <% end %>
   <div class="field">
     <%= f.label :point_of_contact%><br>

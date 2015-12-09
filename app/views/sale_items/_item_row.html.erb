@@ -7,9 +7,20 @@
     <div class="col-xs-8"><h4><%= sale_item.item_name %></small></h4></div>
 
     <div class="col-xs-8">
+      <% supplier =  Supplier.find_by user_id: sale_item.user_id %>
+      <% if supplier.nil? %>
       <h5><%= "Seller: #{users.find(sale_item.user_id).email}" rescue nil%></small></h5>
       <h5><%= "Location: #{sale_item.item_location}" rescue nil%></small></h5>
-      <h5><%= "Location: #{sale_item.item_description}" rescue nil%></small></h5>
+      <h5><%= "Description: #{sale_item.item_description}" rescue nil%></small></h5>
+      <% else %>
+      <h5><%= "Supplier: #{supplier.name}" rescue nil%></small></h5>
+      <h5><%= "Point of Contact: #{supplier.point_of_contact}" rescue nil%></small></h5>
+      <h5><%= "Phone number: #{supplier.phone_number}" rescue nil%></small></h5>
+      <h5><%= "Revenue: #{number_to_currency supplier.revenue}" rescue nil%></small></h5>
+      <h5><%= "Company Category: #{supplier.company_category}" rescue nil%></small></h5>
+      <h5><%= "Location: #{sale_item.item_location}" rescue nil%></small></h5>
+      <h5><%= "Description: #{sale_item.item_description}" rescue nil%></small></h5>
+      <% end %>
       <h5><%= link_to "Product reviews", product_reviews_path(sale_item), :class => "btn btn-warning"%></h5>
       <h5><%= link_to "Seller reviews", seller_reviews_path(sale_item), :class => "btn btn-warning"%></h5>
     </div>

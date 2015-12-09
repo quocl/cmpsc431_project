@@ -208,7 +208,7 @@
 
 <br>
 
-<% if current_user.usergroup == 2 %>
+<% if current_user.usergroup == 0 %>
 <div>
 <h3>Registered suppliers</h3>
 
@@ -245,7 +245,9 @@
             <td><%= link_to 'Edit', edit_supplier_path(supplier), class: "btn btn-primary btn-xs"%>
             <%= link_to 'Remove', supplier, class: "btn btn-danger btn-xs" , method: :delete, data: { confirm: 'Are you sure?' }%></td>
           </tr>
+
         <% end %>
+        <tr><td><%= link_to 'New supplier', new_supplier_path, class: "btn btn-primary"%></td></tr>
     <% end %>  
     
   </tbody>

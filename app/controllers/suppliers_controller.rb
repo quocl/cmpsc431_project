@@ -1,4 +1,5 @@
 class SuppliersController < ApplicationController
+
   def new
 	@users = User.all
 	@supplier = Supplier.new
@@ -22,6 +23,7 @@ class SuppliersController < ApplicationController
         format.html { redirect_to profile_url, notice: 'Supplier was successfully registered.' }
         format.json { render :show, status: :created, location: profile_url }
       else
+        @addresses = nil
         format.html { render :new }
         format.json { render json: @supplier.errors, status: :unprocessable_entity }
       end
@@ -37,6 +39,7 @@ class SuppliersController < ApplicationController
         format.html { redirect_to profile_url, notice: 'Supplier was successfully updated.' }
         format.json { render :show, status: :ok, location: profile_url }
       else
+        @addresses = nil
         format.html { render :edit }
         format.json { render json: @supplier.errors, status: :unprocessable_entity }
       end
@@ -46,7 +49,7 @@ class SuppliersController < ApplicationController
   # DELETE /supplieres/1
   # DELETE /supplieres/1.json
   def destroy
-  	@supplier = Supplier.find(supplier_params[:id])
+  	@supplier = Supplier.find(params[:id])
     @supplier.destroy
     respond_to do |format|
       format.html { redirect_to profile_url, notice: 'Supplier was successfully destroyed.' }
