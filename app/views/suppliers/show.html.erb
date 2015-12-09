@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @address.user_id %>
+</p>
+
+<p>
+  <strong>Street:</strong>
+  <%= @address.street %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @address.city %>
+</p>
+
+<p>
+  <strong>Zipcode:</strong>
+  <%= @address.zipcode %>
+</p>
+
+<p>
+  <strong>Addrtype:</strong>
+  <%= @address.addrType %>
+</p>
+
+<%= link_to 'Back', profile_path, :class => "btn btn-primary" %>

@@ -4,6 +4,7 @@ class UserController < ApplicationController
 		@user = current_user
 		@categories = Category.all
 		@sale_items = SaleItem.all
+		@suppliers = Supplier.all
 	end
 
 	def upgrade

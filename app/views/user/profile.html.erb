@@ -208,6 +208,54 @@
 
 <br>
 
+<% if current_user.usergroup == 2 %>
+<div>
+<h3>Registered suppliers</h3>
+
+<table class = "table table-striped">
+    <% if @suppliers.size == 0%>
+      <td>You don't have any registered supplier.</td>
+      <tr><td><%= link_to 'New supplier', new_supplier_path, class: "btn btn-primary"%></td></tr>
+    <% else %>
+
+      <thead>
+        <tr>
+          <th>Company name</th>
+          <th>Address</th>
+          <th>Point of Contact</th>
+          <th>Phone number</th>
+          <th>Company Category</th>
+          <th>revenue</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @suppliers.each do |supplier| %>
+          <tr>
+            <td><%= supplier.name %></td>
+            <td>
+              <%= Address.find(supplier.address_id).street %>
+              <%= Address.find(supplier.address_id).city %>
+              <%= Address.find(supplier.address_id).zipcode %>
+            </td>
+            <td><%= supplier.point_of_contact %></td>
+            <td><%= supplier.phone_number %>
+            <td><%= supplier.company_category %>
+            <td><%= supplier.revenue %>
+            <td><%= link_to 'Edit', edit_supplier_path(supplier), class: "btn btn-primary btn-xs"%>
+            <%= link_to 'Remove', supplier, class: "btn btn-danger btn-xs" , method: :delete, data: { confirm: 'Are you sure?' }%></td>
+          </tr>
+        <% end %>
+    <% end %>  
+    
+  </tbody>
+
+</table> 
+</div>
+<% end %>
+
+
+
 <div>
   <h3>Sold Items</h3>
   <table class = "table table-striped">

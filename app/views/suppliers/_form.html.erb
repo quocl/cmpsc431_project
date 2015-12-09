@@ -1,0 +1,64 @@
+<%= form_for(@supplier) do |f| %>
+  <% if @supplier.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@supplier.errors.count, "error") %> prohibited this supplier from being saved:</h2>
+
+      <ul>
+      <% @supplier.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :user_id%><br>
+    <%= f.select :user_id, options_from_collection_for_select(@users, 'id', 'username'), {:include_blank => "Select an user to register"}%>
+
+          <script>
+            $(document).ready(function() {
+              $('#supplier_user_id').change(function() {
+                $.ajax({
+                  url: "<%= update_supplier_address_path %>",
+                  data: {
+                    usr_id : $('#supplier_user_id').val()
+                  },
+                  dataType: "script"
+                });
+              });
+            });
+          </script>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <% if @addresses.nil? %>
+  <div class="field">
+    <%= f.label :address_id%><br>
+    <%= f.select :address_id, [["Select an user to update_address",""]] %>
+  </div>
+  <% else %>
+  <div class="field">
+    <%= f.label :address_id%><br>
+    <%= f.select :address_id, options_from_collection_for_select(@addresses, 'id', 'name'), {:include_blank => "Select an user to update_address"}%>
+  </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :point_of_contact%><br>
+    <%= f.text_field :point_of_contact %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_number%><br>
+    <%= f.text_field :phone_number %>
+  </div>
+  <div class="field">
+    <%= f.label :revenue %><br>
+    <%= f.text_field :revenue  %>
+  <div class="field">
+    <%= f.label :company_category %><br>
+     <%= f.text_field :company_category%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get "deliveries/update_address", :as => "update_address"
   get "deliveries/update_card", :as => "update_card"
+    get "suppliers/update_address", :as => "update_supplier_address"
   resources :addresses
   devise_for :users
 
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
   end 
 
   resources :product_reviews
+  resources :suppliers
   resources :ordered_items
   resources :cards
   resources :sale_items

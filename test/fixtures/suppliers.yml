@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  name: MyString
+  point_of_contact: MyString
+  phone_number: 1
+  company_category: MyString
+  revenue: 9.99
+
+two:
+  user_id: 
+  name: MyString
+  point_of_contact: MyString
+  phone_number: 1
+  company_category: MyString
+  revenue: 9.99
