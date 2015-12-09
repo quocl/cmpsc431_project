@@ -6,11 +6,10 @@ class SaleItemsController < ApplicationController
   # GET /sale_items
   # GET /sale_items.json
   def index
-    if params[:search]
-    @search = SaleItem.search do
-      fulltext params[:search]
-    end
-    @sale_items = @search.results 
+if params[:search]
+ 
+    #@sale_items = @search.results 
+    @sale_items = SaleItem.search(params[:search])
     @order_item = current_order.order_items.new
     @wishlist_item = WishlistItem.new
     @users = User.all

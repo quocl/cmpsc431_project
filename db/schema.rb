@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20151209000056) do
   end
 
   create_table "product_reviews", force: :cascade do |t|
-    t.integer  "sale_item_id"
+    t.string   "item_id"
     t.string   "item_name"
     t.float    "rating"
     t.text     "review_title"
@@ -121,7 +121,6 @@ ActiveRecord::Schema.define(version: 20151209000056) do
     t.integer  "user_id"
   end
 
-  add_index "product_reviews", ["sale_item_id"], name: "index_product_reviews_on_sale_item_id"
   add_index "product_reviews", ["user_id"], name: "index_product_reviews_on_user_id"
 
   create_table "sale_items", force: :cascade do |t|
