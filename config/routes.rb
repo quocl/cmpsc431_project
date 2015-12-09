@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
   
   match 'profile' => 'user#profile', via: :get
+  match 'upgrade' => 'user#upgrade', via: :get
+  match 'cancel' => 'user#cancel', via: :get
   match 'manage_address' => 'addresses#edit', via: :get
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

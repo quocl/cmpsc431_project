@@ -117,6 +117,6 @@ class DeliveriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delivery_params
-      params.require(:delivery).permit(:order_id, :user_id, :address_id, :card_id, :shipped)
+      params.require(:delivery).permit(:order_id, :user_id, :address_id, :card_id, :shipped, :shipping_method)
     end
 end

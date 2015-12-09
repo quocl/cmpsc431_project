@@ -2,7 +2,6 @@ class OrderedItemsController < ApplicationController
   
 
   def create
-  	
   end
 	
   def edit

@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
-<h2>Hello <%= "#{@user.first_name} #{@user.last_name}" %></h2>
+<h2>Hello <%= "#{@user.first_name} #{@user.last_name}" %></h2>  
+<% if current_user.usergroup == 1%>
+<h3 ><%= link_to 'Upgrade to Prime by just a few bucks, get huge savings and faster delivery', "upgrade" , class: "btn btn-success"%></h3>
+<% elsif current_user.usergroup == 2%>
+<h3 ><%= link_to 'Give up your huge savings? Membership fee is non-refundable, kid.', "cancel" , class: "btn btn-danger"%></h3>
+<% end %>
 <hr>
 <h3>
 	Address
@@ -140,9 +145,9 @@
           <td><%= wishlist.name %></td>
           <td><%= wishlist.wishlist_items.sum("quantity")%></td>
           <td><%= number_to_currency wishlist.wishlist_items.sum("unit_price")%></td>
-          <td><%= link_to 'Show', wishlist , class: "btn btn-primary btn-xs"%></td>
-          <td><%= link_to 'Edit', edit_wishlist_path(wishlist) , class: "btn btn-primary btn-xs"%></td>
-          <td><%= link_to 'Destroy', wishlist, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-xs"%></td>
+          <td><%= link_to 'Show', wishlist , class: "btn btn-primary btn-xs"%>
+          <%= link_to 'Edit', edit_wishlist_path(wishlist) , class: "btn btn-primary btn-xs"%>
+          <%= link_to 'Destroy', wishlist, method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger btn-xs"%></td>
         </tr>
       <% end %>
     <% end %>
@@ -222,6 +227,7 @@
       <th>Shipping Address</th>
       <th>Item Name</th>
       <th>Quantity</th>
+      <th>Shipping method</th>
       <th>Trackingnumber</th>
 
       <th colspan="3"></th>
@@ -238,6 +244,7 @@
             <%= Address.find(ordered_item.delivery.address_id).zipcode %></td>
         <td><%= SaleItem.find(ordered_item.sale_item_id).item_name%></td>
         <td><%= ordered_item.quantity%></td>
+        <td><%= ordered_item.delivery.shipping_method%></td>
         <% if ordered_item.trackingnumber.nil? %>
           <td><%= "Not shipped yet."%></td>
         <% else %>
@@ -246,7 +253,7 @@
         <% if ordered_item.trackingnumber.nil? %>
         <td><%= link_to 'Fulfill This Order', edit_ordered_item_path(ordered_item), :class=>"btn btn-danger btn-xs"%></td>
         <% else %>
-        <td><%= link_to 'Already Fulfilled', "#", :class=>"btn btn-primary btn-xs"%></td>
+        <td><%= link_to 'Already Fulfilled', "#", :class=>"btn btn-success   btn-xs"%></td>
         <%end %>
       </tr>
     <% end %>

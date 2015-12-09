@@ -17,7 +17,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def total_price
-    unit_price * quantity
+      unit_price * quantity
   end
 
 private
