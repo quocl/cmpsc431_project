@@ -18,8 +18,6 @@ class SaleItemsController < ApplicationController
     if params[:current_category]
       @sale_items = SaleItem.where(category_id: params[:current_category])
     end
-
-
   else
     @sale_items = SaleItem.all
     @order_item = current_order.order_items.new

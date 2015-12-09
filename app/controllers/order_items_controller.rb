@@ -2,8 +2,7 @@ class OrderItemsController < ApplicationController
 
 
   def display_order_report
-      time_range = (1.weeks.ago..Time.now)
-      @all_order_records = OrderItem.where(:created_at => time_range)
+      @all_order_records = OrderItem.all
   end
 
   def create
