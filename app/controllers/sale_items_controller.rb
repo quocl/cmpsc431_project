@@ -13,7 +13,6 @@ class SaleItemsController < ApplicationController
 
     #@sale_items = @search.results 
     @sale_items = SaleItem.search(params[:search])
-
     @order_item = current_order.order_items.new
     @wishlist_item = WishlistItem.new
     @users = User.all
