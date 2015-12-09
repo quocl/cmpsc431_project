@@ -1,6 +1,7 @@
 
 class SaleItem < ActiveRecord::Base
 	belongs_to :user
+    belongs_to :ordered_item
 	validates :user_id, presence: true
 	validates :item_name, presence: true
     validates :item_price, presence: true, numericality: true
@@ -17,11 +18,6 @@ class SaleItem < ActiveRecord::Base
         text :item_location
     end
 
-    def self.search(search)
-        if search
-            where("item_name like ?","%#{search}%")
-        end
-    end
 
 
     

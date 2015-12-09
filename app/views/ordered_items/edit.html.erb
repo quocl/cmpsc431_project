@@ -1,0 +1,25 @@
+<h1>Tracking Number</h1>
+<p>Fill in the tracking number to verify your fulfillment</p>
+              <%= render "form", delivery: @delivery%>
+
+  <table class = "table table-striped">
+            <thead>
+              <tr>
+                <th>Item Name</th>
+                <th>Item amount</th>
+                <th>Location</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <td><%= @sale_items.find(@ordered_item.sale_item_id).item_name %></td>
+              <td><%= @ordered_item.quantity %></td>
+              <td><%= Address.find(@delivery.address_id).street %></td>
+            </tr>
+            
+            
+          
+             </tbody>
+              </table>
+
+

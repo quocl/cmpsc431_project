@@ -1,3 +1,4 @@
+
 <%= form_for(@product_review) do |pr| %>
 
   <div class="field">
@@ -15,7 +16,7 @@
     <%= pr.text_area :review_content %>
   </div>
 
-  <%= pr.hidden_field :item_id, :value => params[:sale_item_id] %>
+  <%= pr.hidden_field :sale_item_id, :value => @sale_item_id %>
 
   <div class="actions">
     <%= pr.submit %>

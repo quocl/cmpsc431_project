@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204161113) do
+ActiveRecord::Schema.define(version: 20151209000056) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -53,9 +53,10 @@ ActiveRecord::Schema.define(version: 20151204161113) do
     t.integer  "user_id"
     t.integer  "address_id"
     t.integer  "card_id"
-    t.string   "trackingnumber"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "shipped"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "shipping_method"
   end
 
   add_index "deliveries", ["address_id"], name: "index_deliveries_on_address_id"
@@ -66,15 +67,30 @@ ActiveRecord::Schema.define(version: 20151204161113) do
   create_table "order_items", force: :cascade do |t|
     t.integer  "sale_item_id"
     t.integer  "order_id"
-    t.decimal  "unit_price",   precision: 12, scale: 2
+    t.decimal  "unit_price",     precision: 12, scale: 2
     t.integer  "quantity"
-    t.decimal  "total_price",  precision: 12, scale: 2
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.decimal  "total_price",    precision: 12, scale: 2
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "trackingnumber"
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
   add_index "order_items", ["sale_item_id"], name: "index_order_items_on_sale_item_id"
+
+  create_table "ordered_items", force: :cascade do |t|
+    t.integer  "delivery_id"
+    t.integer  "user_id"
+    t.integer  "quantity"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "sale_item_id"
+    t.string   "trackingnumber"
+  end
+
+  add_index "ordered_items", ["delivery_id"], name: "index_ordered_items_on_delivery_id"
+  add_index "ordered_items", ["sale_item_id"], name: "index_ordered_items_on_sale_item_id"
+  add_index "ordered_items", ["user_id"], name: "index_ordered_items_on_user_id"
 
   create_table "orders", force: :cascade do |t|
     t.decimal  "subtotal",        precision: 12, scale: 2
@@ -95,14 +111,18 @@ ActiveRecord::Schema.define(version: 20151204161113) do
   end
 
   create_table "product_reviews", force: :cascade do |t|
-    t.string   "item_id"
+    t.integer  "sale_item_id"
     t.string   "item_name"
     t.float    "rating"
     t.text     "review_title"
     t.text     "review_content"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "user_id"
   end
+
+  add_index "product_reviews", ["sale_item_id"], name: "index_product_reviews_on_sale_item_id"
+  add_index "product_reviews", ["user_id"], name: "index_product_reviews_on_user_id"
 
   create_table "sale_items", force: :cascade do |t|
     t.integer  "user_id"
@@ -114,9 +134,11 @@ ActiveRecord::Schema.define(version: 20151204161113) do
     t.datetime "updated_at",       null: false
     t.integer  "category_id"
     t.integer  "amount"
+    t.integer  "ordered_item_id"
   end
 
   add_index "sale_items", ["category_id"], name: "index_sale_items_on_category_id"
+  add_index "sale_items", ["ordered_item_id"], name: "index_sale_items_on_ordered_item_id"
 
   create_table "seller_reviews", force: :cascade do |t|
     t.string   "seller_id"
@@ -126,7 +148,10 @@ ActiveRecord::Schema.define(version: 20151204161113) do
     t.text     "review_content"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "user_id"
   end
+
+  add_index "seller_reviews", ["user_id"], name: "index_seller_reviews_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

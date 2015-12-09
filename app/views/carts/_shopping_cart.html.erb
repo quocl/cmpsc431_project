@@ -10,14 +10,22 @@
 
 <% if @order_items.size == 0 %>
   <p class="text-center">
-    There are no items in your shopping cart.  Please <%= link_to "go back", root_path %> and add some items to your cart.
+    There are no items in your shopping cart.
   </p>
 <% else %>
   <% @order_items.each do |order_item| %>
     <%= render 'carts/cart_row', sale_item: order_item.sale_item, order_item: order_item, show_total: true %>
 <% end %>
 
-<h3 class="text-right">Total Price: <span style="color: green"><%= number_to_currency current_order.subtotal %></span></h3>
+          <% if current_user.usergroup.to_i == 2%>
+            <h3 class="text-right">Total Price: <span style="color: green"><%= number_to_currency current_order.subtotal %></span></h3>
+            <h3 class="text-right">Your GIGANTIC saving: <span style="color: red"><%= number_to_currency -0.1 * current_order.subtotal %></span></h3>
+            <h2 class="text-right">Final Price: <span style="color: green"><%= number_to_currency 0.9 * current_order.subtotal %></span></h2>
+          <% else %>
+            <h2 class="text-right">Total Price: <span style="color: green"><%= number_to_currency current_order.subtotal %></span></h2>
+            <h3 class="text-right">Your would have saved with Prime :( <span style="color: red"><%= number_to_currency -0.1 * current_order.subtotal %></span></h3>
+            <h2 class="text-right">Final Price: <span style="color: green"><%= number_to_currency current_order.subtotal %></span></h2>
+          <% end %>
 <div class="text-right">
 <%= link_to "Check out" , "deliveries/new",  class: "btn btn-success"%>
 </div>

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'order_items/display_order_report'
-  
-  get 'deliveries/new'
+   
 
   get "deliveries/update_address", :as => "update_address"
   get "deliveries/update_card", :as => "update_card"
@@ -17,18 +16,15 @@ Rails.application.routes.draw do
       get :sale_items
     end
   end 
-  resources :sale_items do
-    resources :product_reviews
-    resources :seller_reviews
-  end
 
   resources :product_reviews
-
+  resources :ordered_items
   resources :cards
   resources :sale_items
-resources :deliveries
+  resources :deliveries
   resources :seller_reviews
   resources :wishlists
+  resources :ordered_items, only: [:new, :create, :edit, :update]
   resources :wishlist_items, only: [:create, :update, :destroy]
   resource :carts, only: [:show]
   resources :order_items, only: [:create, :update, :destroy]
@@ -37,6 +33,8 @@ resources :deliveries
 
   
   match 'profile' => 'user#profile', via: :get
+  match 'upgrade' => 'user#upgrade', via: :get
+  match 'cancel' => 'user#cancel', via: :get
   match 'manage_address' => 'addresses#edit', via: :get
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

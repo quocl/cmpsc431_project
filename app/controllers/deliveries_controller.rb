@@ -1,4 +1,5 @@
 class DeliveriesController < ApplicationController
+  before_filter :authenticate_user!, :only => [:edit, :update, :destroy, :create]
   before_action :set_delivery, only: [:show, :edit, :update, :destroy]
 
   # GET /deliveries
@@ -43,6 +44,17 @@ class DeliveriesController < ApplicationController
     
   respond_to do |format|
       if @delivery.save
+        @order.order_items.each do |order_item|
+          ordered_item = OrderedItem.new
+          ordered_item.sale_item = SaleItem.find(order_item.sale_item_id)
+          ordered_item.sale_item_id = order_item.sale_item_id
+          ordered_item.delivery_id = @delivery.id
+          ordered_item.quantity = order_item.quantity
+          User.find(SaleItem.find(order_item.sale_item_id).user_id).ordered_items << ordered_item
+          a = SaleItem.find(order_item.sale_item_id)
+          a.amount -= order_item.quantity
+          a.save
+        end
         @order = Order.new
         session[:order_id] = @order.id
         current_order = @order
@@ -61,7 +73,7 @@ class DeliveriesController < ApplicationController
     respond_to do |format|
       if @delivery.save
         format.html { redirect_to profile_url, notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :created, location: profile_url }
+        format.json { render :show, status: :updated, location: profile_url }
       else
         format.html { render :new }
         format.json { render json: @delivery.errors, status: :unprocessable_entity }
@@ -72,6 +84,16 @@ class DeliveriesController < ApplicationController
   # DELETE /deliveries/1
   # DELETE /deliveries/1.json
   def destroy
+    @delivery = Delivery.find(params[:id])
+    order = Order.find(@delivery.order_id)
+    order.order_items.each do |order_item|
+          ordered_item = OrderedItem.find_by sale_item_id: order_item.sale_item_id
+          a = SaleItem.find(order_item.sale_item_id)
+          a.amount += order_item.quantity
+          a.save
+          User.find(SaleItem.find(order_item.sale_item_id).user_id).ordered_items.find(ordered_item.id).destroy
+          ordered_item.destroy
+        end
     @delivery.destroy
     respond_to do |format|
       format.html { redirect_to profile_url, notice: 'Order was successfully canceled.' }
@@ -95,6 +117,6 @@ class DeliveriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delivery_params
-      params.require(:delivery).permit(:order_id, :user_id, :address_id, :card_id, :trackingnumber)
+      params.require(:delivery).permit(:order_id, :user_id, :address_id, :card_id, :shipped, :shipping_method)
     end
 end

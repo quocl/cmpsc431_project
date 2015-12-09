@@ -10,8 +10,8 @@
       <h5><%= "Seller: #{users.find(sale_item.user_id).email}" rescue nil%></small></h5>
       <h5><%= "Location: #{sale_item.item_location}" rescue nil%></small></h5>
       <h5><%= "Location: #{sale_item.item_description}" rescue nil%></small></h5>
-      <h5><%= link_to "Product reviews", sale_item_product_reviews_path(sale_item.id), :class => "btn btn-warning"%></h5>
-      <h5><%= link_to "Seller reviews", sale_item_seller_reviews_path(sale_item.id), :class => "btn btn-warning"%></h5>
+      <h5><%= link_to "Product reviews", product_reviews_path(sale_item), :class => "btn btn-warning"%></h5>
+      <h5><%= link_to "Seller reviews", seller_reviews_path(sale_item), :class => "btn btn-warning"%></h5>
     </div>
 
     <div class="col-xs-4">

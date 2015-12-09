@@ -1,0 +1,15 @@
+<div>
+<%= form_for (@ordered_item) do |f|%>
+  <%= f.label :trackingnumber %><br>
+    <%= f.text_field :trackingnumber %>
+    <%= f.hidden_field :delivery_id %>
+    <%= f.hidden_field :sale_item_id %>
+    <%= f.hidden_field :user_id %>
+    <%= f.hidden_field :quantity %>
+    <%= f.submit class: "btn btn-primary" %>
+<%end%>
+
+
+
+
+</div>

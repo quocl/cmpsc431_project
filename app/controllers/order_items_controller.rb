@@ -1,10 +1,13 @@
 class OrderItemsController < ApplicationController
+
+
   def display_order_report
       time_range = (1.weeks.ago..Time.now)
       @all_order_records = OrderItem.where(:created_at => time_range)
   end
 
   def create
+    @user = current_user
     @order = current_order
       if !@order.order_items.find_by sale_item_id: order_item_params[:sale_item_id]
         @order_item = @order.order_items.new(order_item_params)
@@ -39,7 +42,7 @@ class OrderItemsController < ApplicationController
 private
 
   def order_item_params
-    params.require(:order_item).permit(:quantity, :sale_item_id)
+    params.require(:order_item).permit(:quantity, :sale_item_id, :trackingnumber)
   end
 
 end

@@ -36,12 +36,21 @@
           <% end %>
              </tbody>
               </table>
-          <h3 class="text-right">Total Price: <span style="color: green"><%= number_to_currency @order.subtotal %></span></h3>
+          
+          <% if current_user.usergroup.to_i == 2%>
+            <h3 class="text-right">Total Price: <span style="color: green"><%= number_to_currency @order.subtotal %></span></h3>
+            <h3 class="text-right">Your GIGANTIC saving: <span style="color: red"><%= number_to_currency -0.1 * @order.subtotal %></span></h3>
+            <h2 class="text-right">Final Price: <span style="color: green"><%= number_to_currency 0.9 * @order.subtotal %></span></h2>
+          <% else %>
+            <h2 class="text-right">Total Price: <span style="color: green"><%= number_to_currency @order.subtotal %></span></h2>
+            <h3 class="text-right">Your can save with Prime:(  <span style="color: red"><%= number_to_currency -0.1 * @order.subtotal %></span></h3>
+            <h2 class="text-right">Final Price: <span style="color: green"><%= number_to_currency @order.subtotal %></span></h2>
+          <% end %>
         <% end %>
 
 
   <div class="row">
-  <div class="field col-xs-6">
+  <div class="field col-xs-4">
   <div class"field col-xs-3"=>
   <%= f.label :address_id %>
   </div>       
@@ -75,11 +84,19 @@
 
   </div>
   </div>
-
-  <div class="field col-xs-6">
+   <div class="field col-xs-3">
+    <%= f.label :shipping_method %><br>
+    <% if current_user.usergroup.to_i == 2%>
+     <%= f.select :shipping_method, [['Two-day Shipping','Two-day Shipping'],['Forever Shipping','Forever Shipping']] %>
+    <% else %>
+      <%= f.select :shipping_method, [['Forever Shipping','Forever Shipping']] %>
+    <% end %>
+  </div>
+  <div class="field col-xs-3">
   <div class"field col-xs-3"=>
   <%= f.label :card_id %>
   </div>
+ 
   <%= render "card_row" %>
   <div class="col-xs-0  ">
 
